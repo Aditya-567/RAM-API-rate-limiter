@@ -1,0 +1,10 @@
+/* src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  @apply bg-richblack-900 text-richblack-5 min-h-screen;
+}
