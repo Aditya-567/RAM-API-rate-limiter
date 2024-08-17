@@ -19,7 +19,7 @@ const NavBar = () => {
     };
 
     return (
-        <nav className=" p-4 text-white flex justify-between">
+        <nav className="bg-richblack-800 p-4 text-white flex justify-between">
             <div>
                 <Link to="/home" className="mr-4">Home</Link>
                 <Link to="/save" className="mr-4">Save Notes</Link>
