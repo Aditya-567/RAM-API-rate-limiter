@@ -1,7 +1,12 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, GithubAuthProvider, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore'; // Firestore imports
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../firebase';
+import google from '../assets/gg.png';
+import github from '../assets/git.png';
+import twitter from '../assets/tt.png';
+import '../components/nav.css';
+import { auth, db } from '../firebase'; // Ensure db is imported from firebase.js
 import './AuthPage.css';
 
 const AuthPage = ({ initialMode }) => {
@@ -10,6 +15,8 @@ const AuthPage = ({ initialMode }) => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const navigate = useNavigate();
 
     const toggle = () => {
@@ -27,7 +34,16 @@ const AuthPage = ({ initialMode }) => {
         }
 
         try {
-            await createUserWithEmailAndPassword(auth, email, password);
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+
+            // Store first name and last name in Firestore
+            await setDoc(doc(db, "users", user.uid), {
+                firstName: firstName,
+                lastName: lastName,
+                email: email
+            });
+
             setError('');
             navigate('/home'); // Redirect to home on successful sign-up
         } catch (error) {
@@ -45,6 +61,30 @@ const AuthPage = ({ initialMode }) => {
         }
     };
 
+    const handleGoogleSignIn = async () => {
+        const provider = new GoogleAuthProvider();
+        try {
+            await signInWithPopup(auth, provider);
+            navigate('/home'); // Redirect to home on successful sign-in
+        } catch (error) {
+            setError(error.message);
+        }
+    };
+
+    const handleGithubSignIn = async () => {
+        const provider = new GithubAuthProvider();
+        try {
+            await signInWithPopup(auth, provider);
+            navigate('/home'); // Redirect to home on successful sign-in
+        } catch (error) {
+            setError(error.message);
+        }
+    };
+
+    const handleTwitterSignIn = async () => {
+        console.log("Twitter sign-in clicked");
+    };
+
     return (
         <div id="container" className={`container ${isSignUp ? 'sign-up' : 'sign-in'}`}>
             <div className="row">
@@ -53,6 +93,39 @@ const AuthPage = ({ initialMode }) => {
                     <div className="form-wrapper align-items-center">
                         <div id="bg" className="form sign-up">
                             {error && <p className="error-message">{error}</p>}
+                            <div className="flex justify-center ml-20 mr-20 gap-10" >
+                                <button style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '195px', borderRadius: '80px' }} onClick={handleGoogleSignIn}>
+                                    <img className='w-15 h-10' src={google} alt="Google" />
+                                </button>
+                                <button style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '195px', borderRadius: '80px' }} onClick={handleGithubSignIn}>
+                                    <img className='w-15 h-10' src={github} alt="Github" />
+                                </button>
+                                <button style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '195px', borderRadius: '80px' }} onClick={handleTwitterSignIn}>
+                                    <img className='w-15 h-10' src={twitter} alt="Twitter" />
+                                </button>
+                            </div>
+                            <div className='flex justify-center text-gray-600 ml-20 mr-20 gap-2 my-4'>
+
+                                <p className='text-gray-100'>
+                                    <span id='bg4' className='py-1 px-2 rounded-full'>Or</span>
+                                </p>
+
+                            </div>
+                            <div className="input-group flex gap-2">
+                                <i className='bx bxs-user '></i>
+                                <input
+                                    type="text"
+                                    placeholder="First Name"
+                                    value={firstName}
+                                    onChange={(e) => setFirstName(e.target.value)}
+                                />
+                                <input
+                                    type="text"
+                                    placeholder="Last Name"
+                                    value={lastName}
+                                    onChange={(e) => setLastName(e.target.value)}
+                                />
+                            </div>
                             <div className="input-group">
                                 <i className='bx bxs-user'></i>
                                 <input
@@ -90,10 +163,28 @@ const AuthPage = ({ initialMode }) => {
                 </div>
                 {/* Sign In Form */}
                 <div className="col align-items-center flex-col sign-in">
-                    <div id="bg" className="form-wrapper align-items-center">
+                    <div className="form-wrapper align-items-center">
                         <div id="bg" className="form sign-in">
                             {error && <p className="error-message">{error}</p>}
-                            <div className="input-group ">
+                            <div className="flex justify-center ml-20 mr-20 gap-10" >
+                                <button style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '195px', borderRadius: '80px' }} onClick={handleGoogleSignIn}>
+                                    <img className='w-15 h-10' src={google} alt="Google" />
+                                </button>
+                                <button style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '195px', borderRadius: '80px' }} onClick={handleGithubSignIn}>
+                                    <img className='w-15 h-10' src={github} alt="Github" />
+                                </button>
+                                <button style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '195px', borderRadius: '80px' }} onClick={handleTwitterSignIn}>
+                                    <img className='w-15 h-10' src={twitter} alt="Twitter" />
+                                </button>
+                            </div>
+                            <div className='flex justify-center ml-20 mr-20 gap-2 my-4'>
+
+                                <p className='text-gray-100'>
+                                    <span id='bg4' className=' py-1 px-2 rounded-full'>Or</span>
+                                </p>
+
+                            </div>
+                            <div className="input-group">
                                 <i className='bx bxs-user'></i>
                                 <input
                                     type="text"

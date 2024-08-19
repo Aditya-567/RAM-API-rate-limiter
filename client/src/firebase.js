@@ -1,5 +1,5 @@
 // Import the functions you need from the SDKs you need
-import { getAnalytics } from "firebase/analytics";
+import { getAnalytics } from "firebase/analytics"; // Import Firebase Analytics if needed
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth"; // Import Firebase Authentication
 import { getFirestore } from "firebase/firestore"; // Import Firestore if needed
@@ -17,12 +17,14 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+// Initialize Firebase Analytics (optional)
 const analytics = getAnalytics(app);
 
 // Initialize Firebase Authentication and get a reference to the service
-export const auth = getAuth(app);  // Export the auth object
+export const auth = getAuth(app);
 
-// Initialize Firestore if you're using it
-export const db = getFirestore(app);  // Export the Firestore database
+// Initialize Firestore and get a reference to the database service
+export const db = getFirestore(app);
 
-// You can now import `auth` in your RegisterPage.jsx or other components to use Firebase Authentication
+// You can now import `auth` and `db` in your components to use Firebase Authentication and Firestore.

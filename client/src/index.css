@@ -6,5 +6,5 @@
 html,
 body,
 #root {
-  @apply bg-richblack-900 text-richblack-5 min-h-screen;
+  @apply bg-richblack-900 text-richblack-5; /* Apply Tailwind styles */
 }
