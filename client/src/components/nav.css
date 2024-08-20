@@ -1,9 +1,9 @@
 #bg1 {
-  box-shadow: 0px 0px 6px 0px rgba(212, 230, 55, 0.7);
+  box-shadow: 0px 0px 6px 0px rgba(213, 230, 55, 0.921);
 }
 
 #bg2 {
-  box-shadow: 0px 0px 6px 0px rgb(90, 13, 13);
+  box-shadow: 0px 0px 6px 0px rgb(227, 13, 13);
 }
 
 #bg3 {
@@ -11,4 +11,7 @@
 }
 #bg4 {
   box-shadow: 0px 0px 4px 0px rgb(8, 10, 140);
+}
+#bg5 {
+  box-shadow: 0px 0px 6px 0px rgb(142, 142, 142);
 }

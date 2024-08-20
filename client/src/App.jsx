@@ -3,12 +3,14 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import PublicNav from './components/publicnav';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import ProtectedRoute from './context/ProtectedRoute';
 import HomePage from './pages/HomePage';
 import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
 import RegisterPage from './pages/RegisterPage';
 import SavePage from './pages/SavePage';
+import Test from './pages/Test';
 
 function App() {
   return (
@@ -23,7 +25,7 @@ function App() {
 }
 
 const MainContent = () => {
-  const { state } = useAuth(); // Ensure this is called inside a component that's wrapped by AuthProvider
+  const { state } = useAuth();
 
   return (
     <>
@@ -32,9 +34,10 @@ const MainContent = () => {
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/save" element={<SavePage />} />
-        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/home" element={<ProtectedRoute><HomePage /></ProtectedRoute>} />
+        <Route path="/save" element={<ProtectedRoute><SavePage /></ProtectedRoute>} />
+        <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+        <Route path="/test" element={<ProtectedRoute><Test /></ProtectedRoute>} />
       </Routes>
     </>
   );

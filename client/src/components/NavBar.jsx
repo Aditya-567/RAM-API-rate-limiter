@@ -1,12 +1,14 @@
 import { signOut } from 'firebase/auth';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import logo from '../assets/logo.png';
 import { useAuth } from '../context/AuthContext';
 import '../context/AuthPage.css';
 import { auth } from '../firebase';
 import EditProfileModal from './EditProfileModal';
-import ProfileModal from './ProfileModal';
 import './nav.css';
+import ProfileModal from './ProfileModal';
+
 
 const NavBar = () => {
     const { state, dispatch } = useAuth();
@@ -29,12 +31,13 @@ const NavBar = () => {
     };
 
     return (
-        <nav className="bg-darkBlue text-white p-4 flex justify-between">
-            <div>
+        <nav className="bg-richblack-900 text-white px-4 pt-4 flex justify-between fixed top-0 left-0 w-full z-50">
+            <div className="flex items-center gap-4">
+
+                <img src={logo} alt="logo" className="h-14" />
                 <Link to="/home" className="mr-4">Home</Link>
                 <Link to="/save" className="mr-4">Save Notes</Link>
-
-
+                <Link to="/test" className="mr-4">Test</Link>
             </div>
             <div>
                 {state.user && (
@@ -50,8 +53,7 @@ const NavBar = () => {
 
             {isProfileOpen && (
                 <ProfileModal isOpen={isProfileOpen} onClose={() => setIsProfileOpen(false)}>
-                    <div className="flex flex-col items-center justify-center pt-8 pb-6 ">
-                        {/* Center items */}
+                    <div className="flex flex-col items-center justify-center pt-8 pb-6">
                         <div className='flex gap-4'>
                             <img id='bg1' src={getProfilePicture()} alt="Profile" className="w-20 h-20 rounded-full border border-yellow-900" />
                             <div>
@@ -70,7 +72,7 @@ const NavBar = () => {
                             >
                                 Edit
                             </button>
-                            <button id='bg2' onClick={handleLogout} className="bg-rgb(10, 81, 105) px-6 py-1 rounded-full mt-4 ">Logout</button>
+                            <button id='bg2' onClick={handleLogout} className="bg-rgb(10, 81, 105) px-6 py-1 rounded-full mt-4">Logout</button>
                         </div>
                     </div>
                 </ProfileModal>
@@ -80,7 +82,6 @@ const NavBar = () => {
                 <EditProfileModal
                     user={state.user}
                     onSave={(updatedUser) => {
-                        // Handle user update logic here
                         dispatch({ type: 'UPDATE_USER', payload: updatedUser });
                         setIsEditProfileOpen(false); // Close the EditProfileModal
                     }}
