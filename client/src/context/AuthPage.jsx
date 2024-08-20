@@ -162,7 +162,7 @@ const AuthPage = ({ initialMode }) => {
                     </div>
                 </div>
                 {/* Sign In Form */}
-                <div className="col align-items-center flex-col sign-in">
+                <div className="col align-items-center flex-col sign-in overflow-hidden">
                     <div className="form-wrapper align-items-center">
                         <div id="bg" className="form sign-in">
                             {error && <p className="error-message">{error}</p>}
