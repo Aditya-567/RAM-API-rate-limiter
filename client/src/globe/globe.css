@@ -14,11 +14,12 @@ body {
   margin-left: 400px;
   height: 201vh;
 }
+
 .animation {
   --size: 400px;
   position: absolute;
-  top: 25vh;
-  right: 50vw;
+  top: 30vh;
+  right: 10vw; /* Moved further right */
   font-size: calc(var(--size) / 100);
   width: var(--size);
   height: var(--size);
@@ -27,6 +28,7 @@ body {
   transition: opacity 2.4s;
   pointer-events: none;
 }
+
 .animation .earth {
   position: absolute;
   top: -15%;
@@ -34,6 +36,7 @@ body {
   width: 130%;
   height: 130%;
 }
+
 .halo,
 .edge {
   width: 100em;
@@ -46,6 +49,7 @@ body {
   box-shadow: #1e85db52 -0.8em 0 5.8em -1.5em inset;
   pointer-events: all;
 }
+
 .halo {
   font-size: 106%;
   margin: -3em;
@@ -56,6 +60,7 @@ body {
   filter: drop-shadow(0.4em 0 4.6em) blur(0.25em);
   touch-action: none;
 }
+
 .halo::before,
 .halo::after {
   content: "";
@@ -65,6 +70,7 @@ body {
   box-shadow: #309bff -1.3em 0 0.9em -0.8em inset;
   mix-blend-mode: color-dodge;
 }
+
 .halo::after {
   margin-top: -100%;
 }
