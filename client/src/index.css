@@ -6,18 +6,17 @@
 html,
 body,
 #root {
-  @apply bg-richblack-900 text-richblack-5;
+  @apply min-h-screen;
+  font-family: "Digital-7 Mono", sans-serif;
+  background: radial-gradient(circle at top, #2d0136, #0f0216 60%, #05010b 90%);
   overflow-y: scroll;
   scrollbar-width: none; /* Hide scrollbar in Firefox */
-}
-#modal-root {
-  @apply bg-richblack-900 text-richblack-5;
 }
 
 body::-webkit-scrollbar {
   display: none; /* Hide scrollbar in WebKit browsers (Chrome, Safari) */
 }
 
-body {
-  font-family: "Digital-7 Mono", sans-serif;
+#modal-root {
+  background: radial-gradient(circle at top, #2d0136, #0f0216 60%, #05010b 90%);
 }

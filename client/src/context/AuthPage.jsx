@@ -1,11 +1,18 @@
-import { createUserWithEmailAndPassword, GithubAuthProvider, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore'; // Firestore imports
+import {
+    createUserWithEmailAndPassword,
+    GithubAuthProvider,
+    GoogleAuthProvider,
+    signInWithEmailAndPassword,
+    signInWithPopup,
+} from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import google from '../assets/gg.png';
 import github from '../assets/git.png';
 import twitter from '../assets/tt.png';
 import '../components/nav.css';
+import { useAuth } from '../context/AuthContext'; // Import the useAuth hook
 import { auth, db } from '../firebase'; // Ensure db is imported from firebase.js
 import './AuthPage.css';
 
@@ -18,6 +25,14 @@ const AuthPage = ({ initialMode }) => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const navigate = useNavigate();
+    const { state } = useAuth(); // Access the user's authentication state
+
+    // Redirect to /home if user is already logged in
+    useEffect(() => {
+        if (state.user) {
+            navigate('/home');
+        }
+    }, [state.user, navigate]);
 
     const toggle = () => {
         setIsSignUp(!isSignUp);
@@ -38,10 +53,10 @@ const AuthPage = ({ initialMode }) => {
             const user = userCredential.user;
 
             // Store first name and last name in Firestore
-            await setDoc(doc(db, "users", user.uid), {
+            await setDoc(doc(db, 'users', user.uid), {
                 firstName: firstName,
                 lastName: lastName,
-                email: email
+                email: email,
             });
 
             setError('');
@@ -82,7 +97,7 @@ const AuthPage = ({ initialMode }) => {
     };
 
     const handleTwitterSignIn = async () => {
-        console.log("Twitter sign-in clicked");
+        console.log('Twitter sign-in clicked');
     };
 
     return (
@@ -93,26 +108,53 @@ const AuthPage = ({ initialMode }) => {
                     <div className="form-wrapper align-items-center">
                         <div id="bg" className="form sign-up">
                             {error && <p className="error-message">{error}</p>}
-                            <div className="flex justify-center ml-20 mr-20 gap-10" >
-                                <button style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '195px', borderRadius: '80px' }} onClick={handleGoogleSignIn}>
-                                    <img className='w-15 h-10' src={google} alt="Google" />
+                            <div className="flex justify-center ml-20 mr-20 gap-10">
+                                <button
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        width: '195px',
+                                        borderRadius: '80px',
+                                    }}
+                                    onClick={handleGoogleSignIn}
+                                >
+                                    <img className="w-15 h-10" src={google} alt="Google" />
                                 </button>
-                                <button style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '195px', borderRadius: '80px' }} onClick={handleGithubSignIn}>
-                                    <img className='w-15 h-10' src={github} alt="Github" />
+                                <button
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        width: '195px',
+                                        borderRadius: '80px',
+                                    }}
+                                    onClick={handleGithubSignIn}
+                                >
+                                    <img className="w-15 h-10" src={github} alt="Github" />
                                 </button>
-                                <button style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '195px', borderRadius: '80px' }} onClick={handleTwitterSignIn}>
-                                    <img className='w-15 h-10' src={twitter} alt="Twitter" />
+                                <button
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        width: '195px',
+                                        borderRadius: '80px',
+                                    }}
+                                    onClick={handleTwitterSignIn}
+                                >
+                                    <img className="w-15 h-10" src={twitter} alt="Twitter" />
                                 </button>
                             </div>
-                            <div className='flex justify-center text-gray-600 ml-20 mr-20 gap-2 my-4'>
-
-                                <p className='text-gray-100'>
-                                    <span id='bg4' className='py-1 px-2 rounded-full'>Or</span>
+                            <div className="flex justify-center text-gray-600 ml-20 mr-20 gap-2 my-4">
+                                <p className="text-gray-100">
+                                    <span id="bg4" className="py-1 px-2 rounded-full">
+                                        Or
+                                    </span>
                                 </p>
-
                             </div>
                             <div className="input-group flex gap-2">
-                                <i className='bx bxs-user '></i>
+                                <i className="bx bxs-user "></i>
                                 <input
                                     type="text"
                                     placeholder="First Name"
@@ -127,7 +169,7 @@ const AuthPage = ({ initialMode }) => {
                                 />
                             </div>
                             <div className="input-group">
-                                <i className='bx bxs-user'></i>
+                                <i className="bx bxs-user"></i>
                                 <input
                                     type="text"
                                     placeholder="Email"
@@ -136,7 +178,7 @@ const AuthPage = ({ initialMode }) => {
                                 />
                             </div>
                             <div className="input-group">
-                                <i className='bx bxs-lock-alt'></i>
+                                <i className="bx bxs-lock-alt"></i>
                                 <input
                                     type="password"
                                     placeholder="Password"
@@ -145,7 +187,7 @@ const AuthPage = ({ initialMode }) => {
                                 />
                             </div>
                             <div className="input-group">
-                                <i className='bx bxs-lock-alt'></i>
+                                <i className="bx bxs-lock-alt"></i>
                                 <input
                                     type="password"
                                     placeholder="Confirm password"
@@ -153,10 +195,14 @@ const AuthPage = ({ initialMode }) => {
                                     onChange={(e) => setConfirmPassword(e.target.value)}
                                 />
                             </div>
-                            <button className="btn" onClick={handleSignUp}>Sign up</button>
-                            <p className='text-gray-600'>
+                            <button className="btn" onClick={handleSignUp}>
+                                Sign up
+                            </button>
+                            <p className="text-gray-600">
                                 <span>Already have an account?</span>
-                                <b onClick={toggle} className="pointer">Sign in here</b>
+                                <b onClick={toggle} className="pointer">
+                                    Sign in here
+                                </b>
                             </p>
                         </div>
                     </div>
@@ -166,26 +212,53 @@ const AuthPage = ({ initialMode }) => {
                     <div className="form-wrapper align-items-center">
                         <div id="bg" className="form sign-in">
                             {error && <p className="error-message">{error}</p>}
-                            <div className="flex justify-center ml-20 mr-20 gap-10" >
-                                <button style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '195px', borderRadius: '80px' }} onClick={handleGoogleSignIn}>
-                                    <img className='w-15 h-10' src={google} alt="Google" />
+                            <div className="flex justify-center ml-20 mr-20 gap-10">
+                                <button
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        width: '195px',
+                                        borderRadius: '80px',
+                                    }}
+                                    onClick={handleGoogleSignIn}
+                                >
+                                    <img className="w-15 h-10" src={google} alt="Google" />
                                 </button>
-                                <button style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '195px', borderRadius: '80px' }} onClick={handleGithubSignIn}>
-                                    <img className='w-15 h-10' src={github} alt="Github" />
+                                <button
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        width: '195px',
+                                        borderRadius: '80px',
+                                    }}
+                                    onClick={handleGithubSignIn}
+                                >
+                                    <img className="w-15 h-10" src={github} alt="Github" />
                                 </button>
-                                <button style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '195px', borderRadius: '80px' }} onClick={handleTwitterSignIn}>
-                                    <img className='w-15 h-10' src={twitter} alt="Twitter" />
+                                <button
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        width: '195px',
+                                        borderRadius: '80px',
+                                    }}
+                                    onClick={handleTwitterSignIn}
+                                >
+                                    <img className="w-15 h-10" src={twitter} alt="Twitter" />
                                 </button>
                             </div>
-                            <div className='flex justify-center ml-20 mr-20 gap-2 my-4'>
-
-                                <p className='text-gray-100'>
-                                    <span id='bg4' className=' py-1 px-2 rounded-full'>Or</span>
+                            <div className="flex justify-center ml-20 mr-20 gap-2 my-4">
+                                <p className="text-gray-100">
+                                    <span id="bg4" className=" py-1 px-2 rounded-full">
+                                        Or
+                                    </span>
                                 </p>
-
                             </div>
                             <div className="input-group">
-                                <i className='bx bxs-user'></i>
+                                <i className="bx bxs-user"></i>
                                 <input
                                     type="text"
                                     placeholder="Email"
@@ -194,7 +267,7 @@ const AuthPage = ({ initialMode }) => {
                                 />
                             </div>
                             <div className="input-group">
-                                <i className='bx bxs-lock-alt'></i>
+                                <i className="bx bxs-lock-alt"></i>
                                 <input
                                     type="password"
                                     placeholder="Password"
@@ -202,13 +275,17 @@ const AuthPage = ({ initialMode }) => {
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
                             </div>
-                            <button className="btn" onClick={handleSignIn}>Sign in</button>
-                            <p className='text-gray-600'>
+                            <button className="btn" onClick={handleSignIn}>
+                                Sign in
+                            </button>
+                            <p className="text-gray-600">
                                 <b>Forgot password?</b>
                             </p>
-                            <p className='text-gray-600'>
+                            <p className="text-gray-600">
                                 <span>Don't have an account?</span>
-                                <b onClick={toggle} className="pointer">Sign up here</b>
+                                <b onClick={toggle} className="pointer">
+                                    Sign up here
+                                </b>
                             </p>
                         </div>
                     </div>

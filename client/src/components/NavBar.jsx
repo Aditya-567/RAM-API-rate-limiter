@@ -31,20 +31,24 @@ const NavBar = () => {
     };
 
     return (
-        <nav className="bg-richblack-900 text-white px-4 pt-4 flex justify-between fixed top-0 left-0 w-full z-50">
-            <div className="flex items-center gap-4">
+        <nav className=" text-white px-4 pt-4 font-bold flex justify-between fixed top-0 left-0 w-full z-50">
+            <div className="flex items-center pl-4 gap-6 ">
 
-                <img src={logo} alt="logo" className="h-14" />
-                <Link to="/home" className="mr-4">Home</Link>
-                <Link to="/save" className="mr-4">Save Notes</Link>
-                <Link to="/test" className="mr-4">Test</Link>
+                <img src={logo} alt="logo" className="h-14" /><h1 className='text-2xl'>RAM API RATE LIMITER</h1>
+
             </div>
-            <div>
+            <div className='flex items-center gap-2'>
+                <div className='flex items-center gap-4 mr-10'>
+
+                    <Link to="/home" className=" border border-blue-500 px-4  py-1 ">Home </Link>
+                    <Link to="/save" className=" border border-blue-500 px-4  py-1 ">Save Notes</Link>
+                    <Link to="/test" className=" border border-blue-500 px-4  py-1 ">Test</Link>
+                </div>
                 {state.user && (
                     <button
-                        id='bg'
+                        id='bg6'
                         onClick={() => setIsProfileOpen(!isProfileOpen)} // Toggle profile modal
-                        className="rounded-full pt-2 pb-2 px-4 border border-blue-500"
+                        className="rounded-full pt-2 pb-2 px-4"
                     >
                         {state.user.email.charAt(0).toUpperCase() || getProfilePicture()}
                     </button>

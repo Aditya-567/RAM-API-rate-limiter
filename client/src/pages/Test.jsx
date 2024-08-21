@@ -112,7 +112,7 @@ const RateLimiterTester = () => {
                     <h1 className='text-3xl font-bold pb-2'>Welcome to <span className="text-yellow-500 text-7xl font-bold role "> </span></h1>
 
                     <h1 className='text-2xl font-bold'>Explore and Test Your JSON Scripts with JSON LAB</h1>
-                    <h1 className='text-lg font-bold'>Welcome to JSON LAB! Our advanced platform allows you to write,
+                    <h1 className='text-lg' style={{ fontFamily: 'monospace', }}>Welcome to JSON LAB! Our advanced platform allows you to write,
                         test, and fine-tune your JSON scripts before integrating them
                         into your applications. JSON LAB provides an intuitive interface
                         designed to help you understand and optimize API rate limiter algorithms.</h1>
