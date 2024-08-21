@@ -5,22 +5,20 @@ import './nav.css';
 
 const PublicNav = () => {
     return (
-        <nav className="p-4 text-white flex justify-between fixed top-0 left-0 w-full z-50 bg-darkBlue">
-            <div className="flex items-center">
-                <img src={logo} alt="logo" className="h-14" />
-                <Link to="/" className="mx-6">Home</Link>
+        <nav className="p-4 text-white flex font-bold justify-between fixed top-0 left-0 w-full z-50 bg-darkBlue">
+            <div className="flex items-center gap-4">
+                <img src={logo} alt="logo" className="h-14" /><h1 className='text-2xl'>RAM API RATE LIMITER</h1>
+
             </div>
             <div className="flex items-center gap-4">
-                <Link to="/login">
-                    <button id="bg4" className="text-white py-1 px-4 rounded-full transition duration-300 ease-in-out hover:bg-blue-900 hover:text-white">
-                        Sign In
-                    </button>
-                </Link>
-                <Link to="/register">
-                    <button id="bg4" className="text-white py-1 px-4 rounded-full transition duration-300 ease-in-out hover:bg-blue-900 hover:text-white">
-                        Sign Up
-                    </button>
-                </Link>
+                <div className='flex items-center gap-4 mr-10'>
+                    <Link to="/" className="border-2 px-4 py-1 border-blue-900 ">Home</Link>
+                    <Link to="/features" className="border-2 px-4 py-1 border-blue-900 ">Features</Link>
+                    <Link to="/about" className="border-2 px-4 py-1 border-blue-900 ">About</Link>
+                    <Link to="/contact" className="border-2 px-4 py-1 border-blue-900 ">Contact</Link>
+
+                </div>
+
             </div>
         </nav>
     );
