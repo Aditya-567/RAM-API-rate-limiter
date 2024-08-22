@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        inter: ["Inter", "sans-serif"],
+        inter: ["Digital-7 mono", "sans-serif"],
       },
       colors: {
         richblack: {

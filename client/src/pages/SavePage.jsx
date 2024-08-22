@@ -75,34 +75,46 @@ const SavePage = () => {
     }, [state.user]);  // Reload notes when the user state changes
 
     return (
-        <div className="p-4 bg-darkBlue text-white min-h-screen">
+        <div className="mx-20 my-36 text-white min-h-screen">
             <h1 className="text-2xl font-bold mb-4">Save Notes</h1>
-            <div className="mb-4">
-                <label className="block mb-2">Note Name:</label>
-                <input
-                    type="text"
-                    value={noteName}
-                    onChange={(e) => setNoteName(e.target.value)}
-                    placeholder="Note Name"
-                    className="w-full p-2 mb-4 bg-gray-700 text-white rounded"
-                />
+            <div>
+                <div className="mb-4">
+                    <label className="block mb-2">Text Content:</label>
+                    <textarea
+                        value={textContent}
+                        onChange={(e) => setTextContent(e.target.value)}
+                        className="w-full p-2 bg-gray-700 text-black rounded"
+                        rows="6"
+                        style={{
+                            fontFamily: 'monospace',
+                            fontSize: '16px',
+                            height: '300px',
+                            width: '630px',
+                            borderRadius: '10px',
+                            boxShadow: '1px 1px 5px white',
+                            background: 'linear-gradient(to bottom, #ffffff, #d3d3d3)'
+                        }}
+                        placeholder="Enter JSON Policy here..."
+                    />
+                </div>
+                <div className="mb-4">
+                    <label className="block mb-2">Note Name:</label>
+                    <input
+                        type="text"
+                        value={noteName}
+                        onChange={(e) => setNoteName(e.target.value)}
+                        placeholder="Note Name"
+                        className="w-full p-2 mb-4 bg-gray-700 text-white rounded"
+                    />
+                    <button
+                        onClick={handleSaveNote}
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                        Save Note
+                    </button>
+                </div>
             </div>
-            <div className="mb-4">
-                <label className="block mb-2">Text Content:</label>
-                <textarea
-                    value={textContent}
-                    onChange={(e) => setTextContent(e.target.value)}
-                    placeholder="Write your notes here..."
-                    className="w-full p-2 bg-gray-700 text-white rounded"
-                    rows="6"
-                />
-            </div>
-            <button
-                onClick={handleSaveNote}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >
-                Save Note
-            </button>
+
             <div className="mt-8">
                 <h2 className="text-xl font-bold mb-4">Saved Notes</h2>
                 {notes.map((note) => (

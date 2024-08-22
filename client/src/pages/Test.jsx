@@ -101,8 +101,8 @@ const RateLimiterTester = () => {
     }, [results]);
 
     return (
-        <div className="mx-20 mt-36">
-            <div className="flex pt-10 pl-10 gap-40">
+        <div className="mx-20 my-36">
+            <div className="flex pt-6 pl-10 gap-40">
                 <div className="flex-1" style={{ position: 'relative' }}>
                     <img className="h-110 w-96" src={map} alt="code" style={{ position: 'relative', zIndex: 1, top: '-100px', left: '300px' }} />
                     <img id="bg5" className='absolute rounded-lg' src='https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzYzZGx5aWE2NDd3Ymg5YzIxYXczaW9sMnZyd2M2MnMxaGZiN3l5byZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/bGgsc5mWoryfgKBx1u/giphy.webp' width="500" height="480" title="API Gif" style={{ position: 'absolute', zIndex: 2, top: '0px', left: '0px' }}></img>
@@ -116,9 +116,9 @@ const RateLimiterTester = () => {
                         test, and fine-tune your JSON scripts before integrating them
                         into your applications. JSON LAB provides an intuitive interface
                         designed to help you understand and optimize API rate limiter algorithms.</h1>
-                    <h1 className='text-lg font-bold py-4'>With JSON LAB, you can:</h1>
-                    <ul className='list-disc font-bold'>
-                        <li><span className='text-yellow-500 font-bold '>Experiment Freely:</span> Write and modify JSON scripts in a safe environment without impacting live systems.</li>
+                    <h1 className='text-lg py-4'>With JSON LAB, you can:</h1>
+                    <ul className='list-disc '>
+                        <li><span className='text-yellow-500 font-bold  '>Experiment Freely:</span> Write and modify JSON scripts in a safe environment without impacting live systems.</li>
                         <li><span className='text-yellow-500 font-bold'>Visualize Results:</span> Instantly see the effects of your JSON configurations with real-time visual tools like pie charts.</li>
                         <li><span className='text-yellow-500 font-bold'>Save and Share: </span> Save your scripts and collaborate with your team for efficient testing and review.</li>
                     </ul>
@@ -155,7 +155,7 @@ const RateLimiterTester = () => {
                                     fontFamily: 'monospace',
                                     fontSize: '16px',
                                     height: '60px',
-                                    width: '210px',
+                                    width: '246px',
                                     borderRadius: '10px',
                                     boxShadow: '1px 1px 5px white',
                                     background: 'linear-gradient(to bottom, #ffffff, #d3d3d3)'
@@ -165,10 +165,10 @@ const RateLimiterTester = () => {
                                 value={numRequests}
                                 onChange={(e) => setNumRequests(parseInt(e.target.value) || 1)} />
                         </label>
-                        <button className="p-2  cursor-pointer"
+                        <button className="p-2  cursor-pointer font-bold"
                             style={{
                                 height: '60px',
-                                width: '406px',
+                                width: '372px',
                                 borderRadius: '10px',
                                 boxShadow: '1px 1px 5px blue',
 
@@ -178,7 +178,7 @@ const RateLimiterTester = () => {
                             onClick={sendRequests}>Send Requests</button>
                     </div>
                 </div>
-                <div id='pie' className="flex-1 " style={{ height: '500px', width: '500px' }}>
+                <div id='pie' className="flex-1 mb-36 " style={{ height: '500px', width: '500px' }}>
                     <canvas id="pie-chart" height="450" width="450"></canvas>
                 </div>
             </div>

@@ -21,6 +21,7 @@ const LandingPage = () => {
 
     return (
         <div className="mx-20 mt-36">
+            <Globe />
             <div className="flex flex-col">
                 <div className="">
                     <h1 className="text-4xl font-bold mb-4">Welcome to Our App</h1>
@@ -36,7 +37,7 @@ const LandingPage = () => {
                     </Link>
                 </div>
                 <div className="flex justify-center flex-end">
-                    <h1><Globe />
+                    <h1>
                         Hello</h1>
                 </div>
 
