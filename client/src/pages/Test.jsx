@@ -170,13 +170,13 @@ const RateLimiterTester = () => {
                     <h1 className='text-3xl font-bold pb-2'>JSON Editor . . .</h1>
                     <div className="flex gap-4 mb-4">
                         <button className="p-2 bg-blue-500 text-white rounded" onClick={fillJsonPolicy1}>
-                        Token Bucket
+                            Token Bucket
                         </button>
                         <button className="p-2 bg-blue-500 text-white rounded" onClick={fillJsonPolicy2}>
-                        Fixed Window
+                            Fixed Window
                         </button>
                         <button className="p-2 bg-blue-500 text-white rounded" onClick={fillJsonPolicy3}>
-                        Sliding Window
+                            Sliding Window
                         </button>
                     </div>
                     <label className="block mb-2">
@@ -202,7 +202,7 @@ const RateLimiterTester = () => {
                                     fontFamily: 'monospace',
                                     fontSize: '16px',
                                     height: '60px',
-                                    width: '210px',
+                                    width: '242px',
                                     borderRadius: '10px',
                                     boxShadow: '1px 1px 5px white',
                                     background: 'linear-gradient(to bottom, #ffffff, #d3d3d3)'
@@ -215,14 +215,14 @@ const RateLimiterTester = () => {
                         <button className="p-2 cursor-pointer"
                             style={{
                                 height: '60px',
-                                width: '406px',
+                                width: '372px',
                                 borderRadius: '10px',
                                 boxShadow: '1px 1px 5px blue',
                             }}
                             onClick={sendRequests}>Send Requests</button>
                     </div>
                 </div>
-                <div id='pie' className="flex-1" style={{ height: '500px', width: '500px' }}>
+                <div id='pie' className="flex-1 mb-32" style={{ height: '500px', width: '500px' }}>
                     <canvas id="pie-chart" height="450" width="450"></canvas>
                 </div>
             </div>
