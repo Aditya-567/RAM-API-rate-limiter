@@ -137,7 +137,7 @@ const RateLimiterTester = () => {
     };
 
     return (
-        <div className="mx-20 mt-36">
+        <div className="mx-20 mt-32">
             <div className="flex pt-10 pl-10 gap-40">
                 <div className="flex-1" style={{ position: 'relative' }}>
                     <img className="h-110 w-96" src={map} alt="code" style={{ position: 'relative', zIndex: 1, top: '-100px', left: '300px' }} />
