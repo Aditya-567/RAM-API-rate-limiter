@@ -1,0 +1,45 @@
+import redis
+import time
+import os
+
+URL = os.environ.get('URL')
+redis_client = redis.Redis.from_url(URL)
+
+def is_allowed(resource, limit, window_size_seconds):
+    start_time = time.time()  # Start measuring time
+
+    key = f"sliding_window_log:{resource}"
+    current_time = int(time.time())
+
+    redis_client.zadd(key, {current_time: current_time})
+    redis_client.zremrangebyscore(key, '-inf', current_time - window_size_seconds)
+
+    count = redis_client.zcount(key, '-inf', '+inf')
+
+    allowed = count <= limit
+
+    end_time = time.time()  # End measuring time
+    time_taken = end_time - start_time  # Calculate time taken
+
+    return allowed, time_taken
+
+def lambda_handler(event, context):
+    resource = event['resource']
+    limit = event['limit']
+    window_size_seconds = event['window_size_seconds']
+    url = event['url']
+
+    allowed, time_taken = is_allowed(resource, limit, window_size_seconds)
+
+    if allowed:
+        return {
+            'statusCode': 200,
+            'body': f"Allowed request to {url}",
+            'timeTaken': time_taken  # Include time taken in the response
+        }
+    else:
+        return {
+            'statusCode': 429,
+            'body': f"Rate limit exceeded for {url}",
+            'timeTaken': time_taken  # Include time taken in the response
+        }

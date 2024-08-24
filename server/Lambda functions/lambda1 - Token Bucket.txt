@@ -1,0 +1,53 @@
+import redis
+import time
+import os
+
+URL = os.environ.get('URL')
+redis_client = redis.Redis.from_url(URL)
+
+def is_allowed(resource, bucket_size, refill_rate, ttl_seconds):
+    start_time = time.time()  # Start measuring time
+
+    key = f"token_bucket:{resource}"
+    current_tokens = redis_client.get(key)
+    current_tokens = int(current_tokens) if current_tokens else bucket_size
+    
+    last_update_time = redis_client.get(f"last_update_time:{resource}")
+    last_update_time = float(last_update_time) if last_update_time else time.time()
+    time_since_last_update = time.time() - last_update_time
+    
+    tokens_to_add = int(time_since_last_update * (refill_rate / ttl_seconds))
+    current_tokens = min(current_tokens + tokens_to_add, bucket_size)
+    redis_client.setex(key, ttl_seconds, current_tokens)  
+    redis_client.setex(f"last_update_time:{resource}", ttl_seconds, time.time())  
+
+    allowed = current_tokens >= 1
+    if allowed:
+        redis_client.decr(key)
+
+    end_time = time.time()  # End measuring time
+    time_taken = end_time - start_time  # Calculate time taken
+
+    return allowed, time_taken
+
+def lambda_handler(event, context):
+    resource = event['resource']
+    bucket_size = event['bucketsize']
+    refill_rate = event['refillrate']
+    ttl_seconds = event['ttl']
+    url = event['url']
+
+    allowed, time_taken = is_allowed(resource, bucket_size, refill_rate, ttl_seconds)
+
+    if allowed:
+        return {
+            'statusCode': 200,
+            'body': f"Allowed request to {url}",
+            'timeTaken': time_taken  # Include time taken in the response
+        }
+    else:
+        return {
+            'statusCode': 429,
+            'body': f"Rate limit exceeded for {url}",
+            'timeTaken': time_taken  # Include time taken in the response
+        }
