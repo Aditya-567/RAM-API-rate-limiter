@@ -31,7 +31,7 @@ const NavBar = () => {
     };
 
     return (
-        <nav className=" text-white px-4 pt-4 font-bold flex justify-between fixed top-0 left-0 w-full z-50">
+        <nav className=" bg-opacity-50 text-white px-4 pt-4 font-bold flex justify-between fixed top-0 left-0 w-full z-50" style={{ background: 'radial-gradient(circle at top, #2d0136, #0f0216 80%, #05010b 95%)' }}>
             <div className="flex items-center pl-4 gap-6 ">
 
                 <img src={logo} alt="logo" className="h-14" /><h1 className='text-2xl'>RAM API RATE LIMITER</h1>
@@ -41,8 +41,8 @@ const NavBar = () => {
                 <div className='flex items-center gap-4 mr-10'>
 
                     <Link to="/home" className=" border border-blue-500 px-4  py-1 ">Home </Link>
-                    <Link to="/save" className=" border border-blue-500 px-4  py-1 ">Save Notes</Link>
-                    <Link to="/test" className=" border border-blue-500 px-4  py-1 ">Test</Link>
+                    <Link to="/save" className=" border border-blue-500 px-4  py-1 ">Save Policy</Link>
+                    <Link to="/test" className=" border border-blue-500 px-4  py-1 ">JSON LAB</Link>
                 </div>
                 {state.user && (
                     <button

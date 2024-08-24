@@ -1,10 +1,15 @@
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'; // Import the magnifying glass icon
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Import FontAwesomeIcon
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'; // Correctly import the icon
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Add this import
 import { addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc, where } from 'firebase/firestore'; // Import updateDoc here
 import React, { useEffect, useState } from 'react';
+import arrow from '../assets/arrow.png';
 import Modal from '../components/Modal';
 import { useAuth } from '../context/AuthContext';
 import { db } from '../firebase';
+
+
+
+
 
 const SavePage = () => {
     const [noteName, setNoteName] = useState('');
@@ -22,7 +27,8 @@ const SavePage = () => {
             await addDoc(collection(db, "notes"), {
                 uid: state.user.uid,  // Save the UID of the current user
                 name: noteName,
-                text: textContent
+                text: textContent,
+                createdAt: new Date() // Add creation timestamp
             });
             loadNotes();
             setNoteName('');
@@ -78,12 +84,22 @@ const SavePage = () => {
     }, [state.user]);  // Reload notes when the user state changes
 
     return (
-        <div className="mx-20 my-36 text-white min-h-screen">
+        <div className="mx-32 my-40 text-white min-h-screen">
             <div className='flex gap-20'>
-                <div>
-                    <h1 className="text-2xl font-bold mb-4">Save Notes</h1>
+                <div><h1 className='text-5xl font-bold mb-10 ' >JSON Policy Manager</h1>
+                    <h1 className='text-lg font-bold' style={{ fontFamily: 'monospace', width: '600px' }}>Here, you can effortlessly write and save your JSON policies for
+                        future use. Whether you're fine-tuning API requests, setting up configurations, or simply experimenting,
+                        JSON Lab is your go-to tool. Save your work securely and edit your policies
+                        anytime you want, making it easier to manage and reuse your JSON scripts efficiently.</h1>
+
+                    <ul className='list-disc my-2 text-lg'>
+                        <li style={{ fontFamily: 'monospace', }}><span className='text-yellow-500 font-bold ' style={{ fontFamily: 'Digital-7 Mono', }} >Easy Creation and Editing:</span >  Craft your JSON policies with an intuitive editor that lets you focus on what matters most—your code.</li>
+                        <li style={{ fontFamily: 'monospace', }}><span className='text-yellow-500 font-bold' style={{ fontFamily: 'Digital-7 Mono', }}>Secure Storage: </span> Your policies are stored securely, ensuring that your important configurations are always accessible when you need them.</li>
+
+                    </ul>
+                    <h1 className='text-lg font-bold'>Start creating, and let JSON Policy Manager handle the rest!</h1>
                 </div>
-                <div>
+                <div className=''>
                     <div className="mb-2">
 
                         <textarea
@@ -94,7 +110,7 @@ const SavePage = () => {
                             style={{
                                 fontFamily: 'monospace',
                                 fontSize: '16px',
-                                height: '300px',
+                                height: '350px',
                                 width: '630px',
                                 borderRadius: '10px',
                                 boxShadow: '1px 1px 5px white',
@@ -131,70 +147,85 @@ const SavePage = () => {
 
                             }}
                         >
-                            Save Note
+                            Save Policy
                         </button>
+
+                    </div>
+                    <h1
+                        className='text-white font-bold text-xl mt-6 cursor-pointer'
+                        onClick={() => document.getElementById('saved').scrollIntoView({ behavior: 'smooth' })}
+                    >
+                        ⬇️ <span className='text-blue-500'>Click here !!!</span> to save your policy ⬇️
+                    </h1>
+                </div>
+            </div>
+            <div className='text-center mt-40  mb-10'> {/* Centered text content */}
+                <h2 className="text-4xl font-bold mb-4">Saved Policies</h2>
+                <div className="flex justify-center items-center"> {/* Centering wrapper */}
+                    <div className="relative flex items-center"> {/* Wrapper for input and icon */}
+                        <FontAwesomeIcon
+                            icon={faMagnifyingGlass}
+                            className="absolute left-4 text-gray-500"
+                            style={{ fontSize: '18px' }}
+                        /> {/* Search icon inside input */}
+                        <input
+                            type="text"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)} // Update search term on change
+                            placeholder="Search your policies" // Updated placeholder
+                            className="rounded-full pl-12 font-bold text-gray-900 w-full" // Changed to rounded-full with padding for icon
+                            style={{
+                                height: '50px', // Adjusted height
+                                width: '800px', // Set width
+                                backgroundColor: '#e0e0e0', // Light background color
+                                borderRadius: '20px', // Fully rounded corners
+                                boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)', // Softer shadow
+                                border: 'none', // Removed border
+
+                            }}
+                        />
                     </div>
                 </div>
+
+
             </div>
-            <div className='flex gap-2 mt-10'>
-                <h2 className="text-xl font-bold mb-4">Saved Notes</h2>
-                <div className="relative flex items-center"> {/* Wrapper for input and icon */}
-                    <input
-                        type="text"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)} // Update search term on change
-                        placeholder="Search notes..."
-                        className="rounded pl-10 text-black w-full"
-                        style={{
-                            height: '30px',
-                            borderRadius: '4px',
-                            boxShadow: '1px 1px 5px blue',
-                        }}
-                    />
-                    <FontAwesomeIcon
-                        icon={faMagnifyingGlass}
-                        className="absolute left-3 text-gray-500"
-                    />
+
+            <div id='saved' className="my-8">
+                <div className="flex justify-between items-center text-white font-bold border-b border-gray-700 pb-2 mb-4">
+                    <div className="w-1/2">Name</div>
+                    <div className="w-1/2 text-left">EDITED AT</div>
+
                 </div>
-            </div>
 
-            <div className=" flex flex-wrap gap-4 mt-8">
+                {notes.filter(note => note.name.toLowerCase().includes(searchTerm.toLowerCase())).map((note) => (
+                    <div key={note.id} className="flex justify-between items-center bg-gray-800 text-white rounded-lg py-2 px-4 mb-2">
+                        <div className="flex items-center w-1/2">
+                            <img src={arrow} alt="PDF Icon" className="h-6 mr-2" style={{ filter: 'invert(100%)' }} />
+                            <h3
+                                className="text-lg font-semibold cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap"
+                                onClick={() => handleEditNote(note)}
+                                style={{ maxWidth: 'calc(100% - 30px)' }}
+                            >
+                                {note.name}
+                            </h3>
+                        </div>
 
-                {notes.filter(note => note.name.toLowerCase().includes(searchTerm.toLowerCase())).map((note) => ( // Filter notes based on search term
-                    <div key={note.id}
-                        style={{
-                            paddingRight: '16px',
-                            paddingLeft: '20px',
-                            height: '60px',
-                            width: '250px',
-                            fontSize: '16px',
-                            borderRadius: '10px',
-                            boxShadow: '1px 1px 5px blue',
-                            overflow: 'hidden',  // Prevent overflow
-                            textOverflow: 'ellipsis',  // Add ellipsis for overflowed text
-                            whiteSpace: 'nowrap',  // Prevent text wrapping
-                            display: 'flex',  // Center items
-                            flexDirection: 'row',  // Align items vertically
-                            justifyContent: 'space-between',  // Space between items
-                            alignItems: 'center'  // Center items vertically
-                        }}
-                        className="flex gap-2 justify-center rounded">
-                        <h3
-                            className="text-lg font-semibold cursor-pointer"
-                            onClick={() => handleEditNote(note)}
-                        >
-                            {note.name.length > 16 ? note.name.slice(0, 16) + '..' : note.name}
-                        </h3>
-
-                        <button
-                            onClick={() => handleDeleteNote(note.id)}
-                            className=" bg-red-600 hover:bg-red-700 px-2 py-1 text-white text-sm font-bold  rounded"
-                        >
-                            Delete
-                        </button>
+                        <div className="flex items-center justify-between w-1/2">
+                            <div className="text-gray-400 text-right">
+                                {/* Display actual creation time */}
+                                You created • {note.createdAt ? new Date(note.createdAt.seconds * 1000).toLocaleString() : 'Unknown time'} {/* Convert Firestore timestamp */}
+                            </div>
+                            <button
+                                onClick={() => handleDeleteNote(note.id)}
+                                className="bg-red-600 hover:bg-red-700 text-white text-sm font-bold rounded px-3 py-1 ml-4"
+                            >
+                                Delete
+                            </button>
+                        </div>
                     </div>
                 ))}
             </div>
+
 
             <Modal
                 isOpen={isModalOpen}
