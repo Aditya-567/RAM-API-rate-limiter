@@ -1,0 +1,44 @@
+import redis
+import time
+import os
+
+URL = os.environ.get('URL')
+redis_client = redis.Redis.from_url(URL)
+
+def is_allowed(resource, limit, window_size_seconds):
+    start_time = time.time()  # Start measuring time
+
+    key = f"fixed_window:{resource}"
+    current_count = redis_client.get(key)
+    current_count = int(current_count) if current_count else 0
+    
+    allowed = current_count < limit
+    if allowed:
+        current_count += 1
+        redis_client.setex(key, window_size_seconds, current_count)
+
+    end_time = time.time()  # End measuring time
+    time_taken = end_time - start_time  # Calculate time taken
+
+    return allowed, time_taken
+
+def lambda_handler(event, context):
+    resource = event['resource']
+    limit = event['limit']
+    window_size_seconds = event['window_size_seconds']
+    url = event['url']
+
+    allowed, time_taken = is_allowed(resource, limit, window_size_seconds)
+
+    if allowed:
+        return {
+            'statusCode': 200,
+            'body': f"Allowed request to {url}",
+            'timeTaken': time_taken  # Include time taken in the response
+        }
+    else:
+        return {
+            'statusCode': 429,
+            'body': f"Rate limit exceeded for {url}",
+            'timeTaken': time_taken  # Include time taken in the response
+        }

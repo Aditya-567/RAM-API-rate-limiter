@@ -1,0 +1,87 @@
+import boto3
+import json
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
+lambda_client = boto3.client('lambda')
+
+def validate_payload(function_name, payload):
+    expected_parameters = {
+        'Lambda1-RL': ['resource', 'url', 'bucketsize', 'refillrate', 'ttl'],
+        'Lambda2-RL': ['resource', 'url', 'limit', 'window_size_seconds'],
+        'Lambda3-RL': ['resource', 'url', 'limit', 'window_size_seconds']
+    }
+    
+    if function_name in expected_parameters:
+        return all(param in payload for param in expected_parameters[function_name])
+    else:
+        return True  
+
+def invoke_lambda(function_name, payload):
+    function_arns = {
+        'Lambda1-RL': 'arn:aws:lambda:ap-south-1:************:function:function1',
+        'Lambda2-RL': 'arn:aws:lambda:ap-south-1:************:function:function2',
+        'Lambda3-RL': 'arn:aws:lambda:ap-south-1:************:function:function3'
+    }
+    
+    try:
+        start_time = time.time()
+        print(f"Invoking {function_name} with payload: {payload}")
+        response = lambda_client.invoke(
+            FunctionName=function_arns[function_name],
+            InvocationType='RequestResponse',  
+            Payload=json.dumps(payload)
+        )
+        end_time = time.time()
+        
+        response_payload = json.load(response['Payload'])
+        time_taken = end_time - start_time
+        print(f"Response from {function_name}: {response_payload}, Time taken: {time_taken}")
+        return function_name, response_payload, time_taken
+
+    except Exception as e:
+        print(f"Error invoking {function_name}: {str(e)}")
+        return function_name, {"statusCode": 500, "body": str(e)}, float('inf')
+
+def lambda_handler(event, context):
+    payload = event.get('payload', {})
+    
+    # Validate payload against each function's expected parameters
+    for function_name in ['Lambda1-RL', 'Lambda2-RL', 'Lambda3-RL']:
+        if not validate_payload(function_name, payload):
+            return {
+                'statusCode': 400,
+                'body': f'Invalid payload format for function: {function_name}'
+            }
+    
+    try:
+        results = {}
+        with ThreadPoolExecutor(max_workers=3) as executor:
+            futures = {
+                executor.submit(invoke_lambda, function_name, payload): function_name
+                for function_name in ['Lambda1-RL', 'Lambda2-RL', 'Lambda3-RL']
+            }
+            for future in as_completed(futures):
+                function_name, result, time_taken = future.result()
+                results[function_name] = {
+                    'result': result,
+                    'timeTaken': time_taken
+                }
+        
+        # Find the best algorithm by time taken
+        best_algorithm = min(results, key=lambda k: results[k]['timeTaken'])
+        
+        return {
+            'statusCode': 200,
+            'bestAlgorithm': best_algorithm,
+            'result': results[best_algorithm]['result'],
+            'timeTaken': results[best_algorithm]['timeTaken'],
+            'allResults': results  # Optional: Include all results for comparison
+        }
+    
+    except Exception as e:
+        print(f"Error in lambda_handler: {str(e)}")
+        return {
+            'statusCode': 500,
+            'body': f'Error invoking functions: {str(e)}'
+        }
