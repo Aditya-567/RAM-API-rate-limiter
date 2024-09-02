@@ -12,14 +12,14 @@ body {
     #000000 100%
   );
   margin-left: 400px;
-  height: 201vh;
+  height: 100vh;
 }
 
 .animation {
-  --size: 400px;
-  position: absolute;
-  top: 30vh;
-  right: 10vw; /* Moved further right */
+  --size: 500px;
+  position: relative;
+  top: 5vh;
+  right: -2vw; /* Moved further right */
   font-size: calc(var(--size) / 100);
   width: var(--size);
   height: var(--size);

@@ -148,7 +148,7 @@ const AuthPage = ({ initialMode }) => {
                             </div>
                             <div className="flex justify-center text-gray-600 ml-20 mr-20 gap-2 my-4">
                                 <p className="text-gray-100">
-                                    <span id="bg4" className="py-1 px-2 rounded-full">
+                                    <span id="bg" className="py-1 px-2 rounded-full">
                                         Or
                                     </span>
                                 </p>
@@ -198,9 +198,9 @@ const AuthPage = ({ initialMode }) => {
                             <button className="btn" onClick={handleSignUp}>
                                 Sign up
                             </button>
-                            <p className="text-gray-600">
-                                <span>Already have an account?</span>
-                                <b onClick={toggle} className="pointer">
+                            <p className="text-gray-600 font-bold" style={{ fontSize: '14px', }}>
+                                <span>Already have an account? </span>
+                                <b onClick={toggle} className="pointer text-blue-500" style={{ fontSize: '18px', }}>
                                     Sign in here
                                 </b>
                             </p>
@@ -252,7 +252,7 @@ const AuthPage = ({ initialMode }) => {
                             </div>
                             <div className="flex justify-center ml-20 mr-20 gap-2 my-4">
                                 <p className="text-gray-100">
-                                    <span id="bg4" className=" py-1 px-2 rounded-full">
+                                    <span id="bg" className=" py-1 px-2 rounded-full">
                                         Or
                                     </span>
                                 </p>
@@ -278,12 +278,12 @@ const AuthPage = ({ initialMode }) => {
                             <button className="btn" onClick={handleSignIn}>
                                 Sign in
                             </button>
-                            <p className="text-gray-600">
+                            <p className="text-gray-500 font-bold" style={{ fontSize: '16px', }}>
                                 <b>Forgot password?</b>
                             </p>
-                            <p className="text-gray-600">
-                                <span>Don't have an account?</span>
-                                <b onClick={toggle} className="pointer">
+                            <p className="text-gray-500 font-bold " style={{ fontSize: '14px', }}>
+                                <span>Don't have an account? </span>
+                                <b onClick={toggle} className="pointer text-blue-500" style={{ fontSize: '18px', }}>
                                     Sign up here
                                 </b>
                             </p>

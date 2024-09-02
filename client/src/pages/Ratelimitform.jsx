@@ -1,6 +1,6 @@
+import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from 'chart.js';
 import React, { useState } from 'react';
 import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -40,9 +40,9 @@ const RateLimitForm = () => {
             });
 
             const result = await res.json();
-            
+
             let algorithmName;
-            switch(result.bestAlgorithm) {
+            switch (result.bestAlgorithm) {
                 case 'Lambda1-RL':
                     algorithmName = 'Token Bucket';
                     break;
@@ -96,14 +96,16 @@ const RateLimitForm = () => {
     };
 
     return (
-        <div style={{width:'600px'}} className=" mx-auto p-6 bg-gray-800 text-white rounded-lg shadow-lg">
+        <div style={{ width: '600px' }} className=" mx-auto p-6 bg-gray-800 text-white rounded-lg shadow-lg">
             <h2 className="text-center text-2xl font-bold mb-6">Rate Limiting Test</h2>
             <form onSubmit={handleSubmit}>
                 <div className="mb-4">
-                    <label htmlFor="url" className="block text-sm font-medium text-gray-300">URL:</label>
+
                     <input
                         type="text"
                         id="url"
+                        style={{ fontFamily: 'monospace', fontSize: '16px', }}
+                        placeholder="Enter the URL . . ."
                         value={url}
                         onChange={(e) => setUrl(e.target.value)}
                         required
