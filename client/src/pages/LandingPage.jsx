@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { Link as ScrollLink } from 'react-scroll'; // Import Link from react-scroll
 import Typed from 'typed.js'; // Ensure Typed.js is imported
 import { useAuth } from '../context/AuthContext';
 import Globe from '../globe/globe';
@@ -34,7 +35,7 @@ const LandingPage = () => {
     }, []);
 
     return (
-        <div className="mx-20 mt-36">
+        <div className="mx-20 my-36">
 
             <div className="flex flex-col md:flex-row pl-10 mb-40">
                 <div className="md:w-1/2">
@@ -49,36 +50,41 @@ const LandingPage = () => {
                                 Sign In
                             </button>
                         </Link>
-                        <Link to="#features">
+                        <ScrollLink to="features" smooth={true} duration={500}>
                             <button id="bg" className="text-white border-2 px-4 py-1 border-blue-900 transition duration-300 ease-in-out hover:bg-blue-900 hover:text-white">
                                 Features
                             </button>
-                        </Link>
+                        </ScrollLink>
                     </div>
                 </div>
                 <div className="flex justify-center md:w-1/2">
                     <Globe />
                 </div>
             </div>
-            <div id="features" className=" mt-40 justify-center items-center">
-                <h1>Features</h1>
-                <div className='flex flex-col'>
-                    <div className='flex flex-row'>
-                        <h1>1</h1>
-                        <h1>2</h1>
-                        <h1>3</h1>
+            <div id="features" className="my-40 flex flex-col items-center">
+                <h1 className="text-6xl font-extrabold mb-10">Features</h1>
+                <div className="flex gap-8">
+                    <div className="  border-2 border-blue-900 text-center" style={{ height: '200px', width: '350px' }}>
+                        <h2 className="text-xl font-bold mb-2">Compare</h2>
+                        <p>Compare your JSON policies easily.</p>
                     </div>
-                    <div className='flex flex-row'>
-                        <h1>1</h1>
-                        <h1>2</h1>
-                        <h1>3</h1>
+                    <div className="  border-2 border-blue-900 text-center" style={{ height: '200px', width: '350px' }}>
+                        <h2 className="text-xl font-bold mb-2">Save</h2>
+                        <p>Save your JSON policies for future use.</p>
                     </div>
-                    <h1>4</h1>
-                    <h1>5</h1>
-                    <h1>6</h1>
-                    <h1>7</h1>
-                    <h1>8</h1>
-                    <h1>9</h1>
+                    <div className="  border-2 border-blue-900 text-center" style={{ height: '200px', width: '350px' }}>
+                        <h2 className="text-xl font-bold mb-2">JSON Lab</h2>
+                        <p>Experiment with JSON policies in the lab.</p>
+                    </div>
+                </div>
+            </div>
+            <div className="my-40 flex flex-col items-center">
+                <h1 className="text-3xl font-extrabold mb-10">Pricing</h1>
+                <div className="flex gap-8">
+                    <div className=" p-10 border-2 border-blue-900 text-center">
+                        <h2 className="text-xl font-bold mb-2">Free</h2>
+                        <p>Free to use.</p>
+                    </div>
                 </div>
             </div>
         </div>
