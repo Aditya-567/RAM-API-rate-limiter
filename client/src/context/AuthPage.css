@@ -237,10 +237,6 @@ body {
     margin: 0;
   }
 
-  .text p {
-    display: none;
-  }
-
   .text h2 {
     margin: 0.5rem;
     font-size: 2rem;

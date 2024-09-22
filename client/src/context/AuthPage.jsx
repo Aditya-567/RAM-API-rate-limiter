@@ -154,14 +154,16 @@ const AuthPage = ({ initialMode }) => {
                                 </p>
                             </div>
                             <div className="input-group flex gap-2">
-                                <i className="bx bxs-user "></i>
+                                <i className="bx bxs-user font-bold "></i>
                                 <input
+                                    className='font-bold'
                                     type="text"
                                     placeholder="First Name"
                                     value={firstName}
                                     onChange={(e) => setFirstName(e.target.value)}
                                 />
                                 <input
+                                    className='font-bold'
                                     type="text"
                                     placeholder="Last Name"
                                     value={lastName}
@@ -169,8 +171,9 @@ const AuthPage = ({ initialMode }) => {
                                 />
                             </div>
                             <div className="input-group">
-                                <i className="bx bxs-user"></i>
+                                <i className="bx bxs-user font-bold"></i>
                                 <input
+                                    className='font-bold'
                                     type="text"
                                     placeholder="Email"
                                     value={email}
@@ -178,8 +181,9 @@ const AuthPage = ({ initialMode }) => {
                                 />
                             </div>
                             <div className="input-group">
-                                <i className="bx bxs-lock-alt"></i>
+                                <i className="bx bxs-lock-alt font-bold"></i>
                                 <input
+                                    className='font-bold'
                                     type="password"
                                     placeholder="Password"
                                     value={password}
@@ -187,8 +191,9 @@ const AuthPage = ({ initialMode }) => {
                                 />
                             </div>
                             <div className="input-group">
-                                <i className="bx bxs-lock-alt"></i>
+                                <i className="bx bxs-lock-alt font-bold "></i>
                                 <input
+                                    className='font-bold'
                                     type="password"
                                     placeholder="Confirm password"
                                     value={confirmPassword}
@@ -258,8 +263,9 @@ const AuthPage = ({ initialMode }) => {
                                 </p>
                             </div>
                             <div className="input-group">
-                                <i className="bx bxs-user"></i>
+                                <i className="bx bxs-user font-bold"></i>
                                 <input
+                                    className='font-bold'
                                     type="text"
                                     placeholder="Email"
                                     value={email}
@@ -267,8 +273,9 @@ const AuthPage = ({ initialMode }) => {
                                 />
                             </div>
                             <div className="input-group">
-                                <i className="bx bxs-lock-alt"></i>
+                                <i className="bx bxs-lock-alt font-bold"></i>
                                 <input
+                                    className='font-bold'
                                     type="password"
                                     placeholder="Password"
                                     value={password}
@@ -291,14 +298,15 @@ const AuthPage = ({ initialMode }) => {
                     </div>
                 </div>
             </div>
-            <div className="row content-row">
-                <div className="col align-items-center flex-col">
-                    <div className="text sign-in">
-                        <h2>Welcome</h2>
+            <div className="row content-row" >
+                <div className="col align-items-center flex-col" style={{ textAlign: 'left', marginLeft: '-120px' }}>
+                    <div className='text sign-in' style={{ marginTop: '-140px' }}>
+
+                        <h2 className='text-gray-400 text-4xl font-bold pl-16'>Welcome Back Devs</h2>
                     </div>
                 </div>
                 <div className="col align-items-center flex-col">
-                    <div className="text sign-up">
+                    <div className="text sign-up" style={{ marginTop: '-10px' }}>
                         <h2>Join with us</h2>
                     </div>
                 </div>
