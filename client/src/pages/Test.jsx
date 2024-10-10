@@ -7,7 +7,7 @@ import {
     Tooltip
 } from 'chart.js';
 import React, { useEffect, useRef, useState } from 'react';
-import Typed from 'typed.js'; // Import Typed.js
+import Typed from 'typed.js';
 import code from '../assets/code.png';
 import map from '../assets/map.png';
 import '../components/nav.css';
@@ -15,10 +15,10 @@ import '../components/nav.css';
 ChartJS.register(ArcElement, Tooltip, Legend, PieController);
 
 const RateLimiterTester = () => {
-    const isLoggedIn = true; // Replace with actual login check logic
+    const isLoggedIn = true;
 
     if (!isLoggedIn) {
-        return <div>You must be logged in to access this page.</div>; // Message for unauthenticated users
+        return <div>You must be logged in to access this page.</div>;
     }
 
     const [jsonPolicy, setJsonPolicy] = useState('');
@@ -27,7 +27,6 @@ const RateLimiterTester = () => {
     const chartRef = useRef(null);
 
     useEffect(() => {
-        // Initialize Typed.js
         const typed = new Typed('.role', {
             strings: ["JSON LAB "],
             typeSpeed: 200,
@@ -37,17 +36,16 @@ const RateLimiterTester = () => {
             showCursor: false,
         });
 
-        // Cleanup function to destroy the Typed instance on component unmount
         return () => {
             typed.destroy();
         };
     }, []);
 
     const sendRequests = async () => {
-        let newResults = []; // Temporary array to hold new results
+        let newResults = [];
         for (let i = 0; i < numRequests; i++) {
             try {
-                const response = await axios.post('https://dg9xtb33z5.execute-api.ap-south-1.amazonaws.com/prod', jsonPolicy, {
+                const response = await axios.post(import.meta.env.VITE_API_URL1, jsonPolicy, {
                     headers: {
                         'Content-Type': 'application/json'
                     }
@@ -64,7 +62,7 @@ const RateLimiterTester = () => {
 
     useEffect(() => {
         if (chartRef.current) {
-            chartRef.current.destroy(); // Destroy the current chart instance if exists
+            chartRef.current.destroy();
         }
 
         const ctx = document.getElementById('pie-chart').getContext('2d');
@@ -90,7 +88,7 @@ const RateLimiterTester = () => {
                         labels: {
                             font: {
                                 family: 'Digital-7 mono',
-                                weight: 'bold'// Set the font to Digital-7
+                                weight: 'bold'
                             },
                         },
                     },
@@ -99,14 +97,16 @@ const RateLimiterTester = () => {
         });
     }, [results]);
 
+
     const fillJsonPolicy1 = () => {
         setJsonPolicy(JSON.stringify({
-            "function": "Lambda3-RL",
+            "function": "Lambda1-RL",
             "payload": {
-                "resource": "MK3_resource",
+                "resource": "MKResource",
                 "url": "http://example.com",
-                "limit": 3,
-                "window_size_seconds": 10
+                "bucketsize": 5,
+                "refillrate": 1,
+                "ttl": 10
             }
         }, null, 2)); // Prettify the JSON with 2-space indentation
     };
@@ -125,13 +125,12 @@ const RateLimiterTester = () => {
 
     const fillJsonPolicy3 = () => {
         setJsonPolicy(JSON.stringify({
-            "function": "Lambda1-RL",
+            "function": "Lambda3-RL",
             "payload": {
-                "resource": "MKResource",
+                "resource": "MK3_resource",
                 "url": "http://example.com",
-                "bucketsize": 5,
-                "refillrate": 1,
-                "ttl": 10
+                "limit": 3,
+                "window_size_seconds": 10
             }
         }, null, 2)); // Prettify the JSON with 2-space indentation
     };
