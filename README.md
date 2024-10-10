@@ -13,3 +13,6 @@ AmazonElastiCacheFullAccess
 AWSLambda_FullAccess
 
 Custom Policy
+
+## Redis URL
+rediss://redis-endpoint
