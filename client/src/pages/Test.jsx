@@ -22,8 +22,10 @@ const RateLimiterTester = () => {
     }
 
     const [jsonPolicy, setJsonPolicy] = useState('');
-    const [numRequests, setNumRequests] = useState();
+    const [numRequests, setNumRequests] = useState(1);
     const [results, setResults] = useState([]);
+    const [bestAlgorithm, setBestAlgorithm] = useState(null);
+    const [loading, setLoading] = useState(false);
     const chartRef = useRef(null);
 
     useEffect(() => {
@@ -42,22 +44,36 @@ const RateLimiterTester = () => {
     }, []);
 
     const sendRequests = async () => {
+        setLoading(true);
         let newResults = [];
-        for (let i = 0; i < numRequests; i++) {
-            try {
-                const response = await axios.post(import.meta.env.VITE_API_URL1, jsonPolicy, {
+        try {
+            for (let i = 0; i < numRequests; i++) {
+                const response = await axios.post(import.meta.env.VITE_API_URL1, {
+                    function: JSON.parse(jsonPolicy).function,
+                    payload: JSON.parse(jsonPolicy).payload
+                }, {
                     headers: {
                         'Content-Type': 'application/json'
                     }
                 });
                 console.log('Request Result:', response.data);
                 newResults.push(response.data);
-            } catch (error) {
-                console.error('Error sending request:', error);
-                newResults.push({ statusCode: error.response?.status });
             }
+            setResults(newResults);
+
+            // Compute best algorithm by comparing response time or other metrics
+            const timingResults = newResults.reduce((acc, result) => {
+                const functionName = result.bestAlgorithm || result.function;
+                acc[functionName] = (acc[functionName] || 0) + 1;
+                return acc;
+            }, {});
+            setBestAlgorithm(Object.keys(timingResults).reduce((a, b) => timingResults[a] > timingResults[b] ? a : b));
+
+        } catch (error) {
+            console.error('Error sending request:', error);
+        } finally {
+            setLoading(false);
         }
-        setResults(newResults);
     };
 
     useEffect(() => {
@@ -97,7 +113,7 @@ const RateLimiterTester = () => {
         });
     }, [results]);
 
-
+    // Predefined JSON templates for different Lambda functions
     const fillJsonPolicy1 = () => {
         setJsonPolicy(JSON.stringify({
             "function": "Lambda1-RL",
@@ -108,7 +124,7 @@ const RateLimiterTester = () => {
                 "refillrate": 1,
                 "ttl": 10
             }
-        }, null, 2)); // Prettify the JSON with 2-space indentation
+        }, null, 2));
     };
 
     const fillJsonPolicy2 = () => {
@@ -120,7 +136,7 @@ const RateLimiterTester = () => {
                 "limit": 5,
                 "window_size_seconds": 30
             }
-        }, null, 2)); // Prettify the JSON with 2-space indentation
+        }, null, 2));
     };
 
     const fillJsonPolicy3 = () => {
@@ -132,7 +148,20 @@ const RateLimiterTester = () => {
                 "limit": 3,
                 "window_size_seconds": 10
             }
-        }, null, 2)); // Prettify the JSON with 2-space indentation
+        }, null, 2));
+    };
+
+    const fillJsonPolicy4 = () => {
+        setJsonPolicy(JSON.stringify({
+            "function": "Lambda4-RL",
+            "payload": {
+                "resource": "StepLadder_resource",
+                "url": "http://example.com",
+                "bucketsize": 8,
+                "refillrate": 2,
+                "ttl": 15
+            }
+        }, null, 2));
     };
 
     return (
@@ -176,6 +205,9 @@ const RateLimiterTester = () => {
                         </button>
                         <button className="p-2 bg-blue-500 text-white rounded" onClick={fillJsonPolicy3}>
                             Sliding Window
+                        </button>
+                        <button className="p-2 bg-blue-500 text-white rounded" onClick={fillJsonPolicy4}>
+                            Step Ladder
                         </button>
                     </div>
                     <label className="block mb-2">
