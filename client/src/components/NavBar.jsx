@@ -58,25 +58,25 @@ const NavBar = () => {
             {isProfileOpen && (
                 <ProfileModal isOpen={isProfileOpen} onClose={() => setIsProfileOpen(false)}>
                     <div className="flex flex-col items-center justify-center pt-8 pb-6">
-                        <div className='flex gap-4'>
+                        <div className='flex gap-4 font-bold' style={{ fontFamily: 'monospace', fontSize: '16px' }}>
                             <img id='bg1' src={getProfilePicture()} alt="Profile" className="w-20 h-20 rounded-full border border-yellow-900" />
                             <div>
                                 <p className='mt-4 text-gray-400'>Email: {state.user.email}</p>
                                 <p className='text-gray-400'>Name: {state.user.firstName} {state.user.lastName}</p>
                             </div>
                         </div>
-                        <div className='flex gap-2 pt-6 text-gray-200 ml-8'>
+                        <div className='flex gap-2 pt-6 text-gray-200 ml-28'>
                             <button
                                 id='bg3'
                                 onClick={() => {
                                     setIsProfileOpen(false); // Close the ProfileModal
                                     setIsEditProfileOpen(true); // Open the EditProfileModal
                                 }}
-                                className="bg-rgb(10, 81, 105) px-6 py-1 rounded-full mt-4 border border-blue-900"
+                                className="border-2 border-blue-500 text-white px-6 py-1 mt-4"
                             >
                                 Edit
                             </button>
-                            <button id='bg2' onClick={handleLogout} className="bg-rgb(10, 81, 105) px-6 py-1 rounded-full mt-4">Logout</button>
+                            <button id='bg2' onClick={handleLogout} className="border-2 border-red-500 text-white px-10 py-1 mt-4">Logout</button>
                         </div>
                     </div>
                 </ProfileModal>

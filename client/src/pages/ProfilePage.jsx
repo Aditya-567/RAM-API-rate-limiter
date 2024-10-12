@@ -38,13 +38,13 @@ const ProfilePage = () => {
     };
 
     return (
-        <div className="p-4">
-            <h1 className="text-2xl font-bold">Profile</h1>
+        <div className="p-4 font-bold">
+
             {state.user ? (
-                <div>
+                <div >
                     <img src={getProfilePicture()} alt="Profile" className="w-20 h-20 rounded-full" />
-                    <p>Email: {state.user.email}</p>
-                    <p>Name: {state.user.firstName} {state.user.lastName}</p>
+                    <p >Email: {state.user.email}</p>
+                    <p >Name: {state.user.firstName} {state.user.lastName}</p>
                     <button onClick={() => setIsEditing(true)} className="btn btn-primary mt-4">Edit Profile</button>
                 </div>
             ) : (
