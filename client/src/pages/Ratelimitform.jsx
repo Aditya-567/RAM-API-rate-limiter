@@ -30,7 +30,7 @@ const RateLimitForm = () => {
                 refillrate: 5,
                 ttl: 10,
                 limit: 5,
-                window_size_seconds: 10,
+                window_size_seconds: 60,
             }
         };
 
@@ -51,8 +51,9 @@ const RateLimitForm = () => {
                 if (result.bestAlgorithm === 'Lambda1-RL') acc['Token Bucket']++;
                 if (result.bestAlgorithm === 'Lambda2-RL') acc['Fixed Window']++;
                 if (result.bestAlgorithm === 'Lambda3-RL') acc['Sliding Window']++;
+                if (result.bestAlgorithm === 'Lambda4-RL') acc['Step Ladder']++; // Add Lambda4-RL
                 return acc;
-            }, { 'Token Bucket': 0, 'Fixed Window': 0, 'Sliding Window': 0 });
+            }, { 'Token Bucket': 0, 'Fixed Window': 0, 'Sliding Window': 0, 'Step Ladder': 0 }); // Include Step Ladder
 
             setBestAlgorithm(Object.keys(timingResults).reduce((a, b) => timingResults[a] > timingResults[b] ? a : b));
 
@@ -60,6 +61,7 @@ const RateLimitForm = () => {
                 { algorithm: 'Token Bucket', time: timingResults['Token Bucket'] },
                 { algorithm: 'Fixed Window', time: timingResults['Fixed Window'] },
                 { algorithm: 'Sliding Window', time: timingResults['Sliding Window'] },
+                { algorithm: 'Step Ladder', time: timingResults['Step Ladder'] }, // Add Step Ladder to timingData
             ]);
 
         } catch (err) {
