@@ -306,7 +306,7 @@ const AuthPage = ({ initialMode }) => {
                     </div>
                 </div>
                 <div className="col align-items-center flex-col">
-                    <div className="text sign-up" style={{ marginTop: '-10px' }}>
+                    <div className="text sign-up" style={{ marginTop: '100px', marginLeft: '300px' }}>
                         <h2>Join with us</h2>
                     </div>
                 </div>

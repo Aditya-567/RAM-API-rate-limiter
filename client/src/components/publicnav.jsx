@@ -14,6 +14,9 @@ const PublicNav = () => {
                     <Link to="/" className="border-2 px-4 py-1 border-blue-900">
                         Home
                     </Link>
+                    <Link to="/about" className="border-2 px-4 py-1 border-blue-900">
+                        About
+                    </Link>
 
                     <Link to="/login" className="border-2 px-4 py-1 border-blue-900">
                         Sign In

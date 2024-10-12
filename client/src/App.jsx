@@ -4,6 +4,7 @@ import NavBar from './components/NavBar';
 import PublicNav from './components/publicnav';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import ProtectedRoute from './context/ProtectedRoute';
+import About from './pages/About';
 import HomePage from './pages/HomePage';
 import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
@@ -11,7 +12,6 @@ import ProfilePage from './pages/ProfilePage';
 import RegisterPage from './pages/RegisterPage';
 import SavePage from './pages/SavePage';
 import Test from './pages/Test';
-
 function App() {
   return (
     <AuthProvider>
@@ -33,6 +33,7 @@ const MainContent = () => {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/about" element={<About />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/home" element={<ProtectedRoute><HomePage /></ProtectedRoute>} />
         <Route path="/save" element={<ProtectedRoute><SavePage /></ProtectedRoute>} />
