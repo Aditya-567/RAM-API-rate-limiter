@@ -61,16 +61,16 @@ const About = () => {
                             <p className='font-bold'>Web-Developer & Algorithms Expert</p>
                         </div>
                         <div className='flex flex-row gap-4 justify-center items-center'>
-                            <a href="https://leetcode.com/AdityaKumar" target="_blank" rel="noopener noreferrer">
+                            <a href="#" target="_blank" rel="noopener noreferrer">
                                 <img src={leetcode} width="30" height="30" alt="Aditya Kumar LeetCode" />
                             </a>
-                            <a href="https://twitter.com/AdityaKumar" target="_blank" rel="noopener noreferrer">
+                            <a href="#" target="_blank" rel="noopener noreferrer">
                                 <img src={twitter} width="30" height="30" alt="Aditya Kumar Twitter" />
                             </a>
-                            <a href="https://linkedin.com/in/AdityaKumar" target="_blank" rel="noopener noreferrer">
+                            <a href="#" target="_blank" rel="noopener noreferrer">
                                 <img src={linkedin} width="30" height="30" alt="Aditya Kumar LinkedIn" />
                             </a>
-                            <a href="https://github.com/AdityaKumar" target="_blank" rel="noopener noreferrer">
+                            <a href="#" target="_blank" rel="noopener noreferrer">
                                 <img src={github} width="30" height="30" alt="Aditya Kumar GitHub" />
                             </a>
                         </div>
@@ -84,16 +84,16 @@ const About = () => {
                             <p className='font-bold'>Web-Developer & Algorithms Expert</p>
                         </div>
                         <div className='flex flex-row gap-4 justify-center items-center'>
-                            <a href="https://leetcode.com/AdityaKumar" target="_blank" rel="noopener noreferrer">
+                            <a href="#" target="_blank" rel="noopener noreferrer">
                                 <img src={leetcode} width="30" height="30" alt="Aditya Kumar LeetCode" />
                             </a>
-                            <a href="https://twitter.com/AdityaKumar" target="_blank" rel="noopener noreferrer">
+                            <a href="#" target="_blank" rel="noopener noreferrer">
                                 <img src={twitter} width="30" height="30" alt="Aditya Kumar Twitter" />
                             </a>
-                            <a href="https://linkedin.com/in/AdityaKumar" target="_blank" rel="noopener noreferrer">
+                            <a href="#" target="_blank" rel="noopener noreferrer">
                                 <img src={linkedin} width="30" height="30" alt="Aditya Kumar LinkedIn" />
                             </a>
-                            <a href="https://github.com/AdityaKumar" target="_blank" rel="noopener noreferrer">
+                            <a href="#" target="_blank" rel="noopener noreferrer">
                                 <img src={github} width="30" height="30" alt="Aditya Kumar GitHub" />
                             </a>
                         </div>
@@ -107,16 +107,16 @@ const About = () => {
                             <p className='font-bold'>Web-Developer & Algorithms Expert</p>
                         </div>
                         <div className='flex flex-row gap-4 justify-center items-center'>
-                            <a href="https://leetcode.com/AdityaKumar" target="_blank" rel="noopener noreferrer">
+                            <a href="#" target="_blank" rel="noopener noreferrer">
                                 <img src={leetcode} width="30" height="30" alt="Aditya Kumar LeetCode" />
                             </a>
-                            <a href="https://twitter.com/AdityaKumar" target="_blank" rel="noopener noreferrer">
+                            <a href="#" target="_blank" rel="noopener noreferrer">
                                 <img src={twitter} width="30" height="30" alt="Aditya Kumar Twitter" />
                             </a>
-                            <a href="https://linkedin.com/in/AdityaKumar" target="_blank" rel="noopener noreferrer">
+                            <a href="#" target="_blank" rel="noopener noreferrer">
                                 <img src={linkedin} width="30" height="30" alt="Aditya Kumar LinkedIn" />
                             </a>
-                            <a href="https://github.com/AdityaKumar" target="_blank" rel="noopener noreferrer">
+                            <a href="#" target="_blank" rel="noopener noreferrer">
                                 <img src={github} width="30" height="30" alt="Aditya Kumar GitHub" />
                             </a>
                         </div>
