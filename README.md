@@ -10,7 +10,7 @@ Welcome to the **RAM API** project! This platform allows users to manage, save, 
 - [Setup and Installation](#setup-and-installation)
 - [Rate Limiting Algorithms](#rate-limiting-algorithms)
 - [License](#license)
-- 
+
 ## Features
 
 - **JSON Lab**: Create, save, and edit JSON policies in real-time.
@@ -100,15 +100,20 @@ The RAM API supports the following rate-limiting algorithms:
       * One for controller function
       * One for compare function
       * All of the Lambda functions need to be within a VPC
-   * DO create the role and policies [Lambda Role policies](#lambda-role-policies-required)
+   * Do create the role and policies [Lambda Role policies](#lambda-role-policies-required)
    * For the 4 algorithm lambda you need to upload the zip file first and then create (Given in the server page)
       ```
       lambda_function.py
       ```
       And paste those scripts
+     Now you also need to add environment variables of redis to lambda
+      ```
+      URL - rediss://redis-endpoint
+      ```
    * Create tthe 2 lambda functions (for these you do not require zip file)
       * Do add the ARN of the 4 lambda functions to this    
    * Now Create 2 API gateway REST API (one for controller and one for compare and use those endpoint for the compare)
+   * Increase the time of lambda functions accordingly
 6. Start the frontend:
 
    After deploying the backend, you can start the frontend development server:
@@ -125,12 +130,5 @@ Create a Lambda Role Role with these policies
 -  AmazonElastiCacheFullAccess
 -  AWSLambda_FullAccess
 -  [Custom Policy](server/Lambda%20functions/Lambda_function_Policy): Ensure you have a custom policy for Redis access if needed.
-
-Custom Policy
-
-## Redis URL
-In this format the environment variable should be set up in lambda function
-
-URL - rediss://redis-endpoint
 
 
