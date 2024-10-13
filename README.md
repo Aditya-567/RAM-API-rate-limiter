@@ -3,7 +3,8 @@
 Welcome to the **RAM API** project! This platform allows users to manage, save, and edit JSON policies while offering built-in rate-limiting functionalities, user authentication, and algorithm comparison features. RAM API is designed to be a flexible and scalable solution for controlling access and efficiently managing JSON-based policies.
 
 Try it
-https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWxtZTV4cmpvYXBlcDRydjhzZGQ3dnRyenc3NXk0M2szenhkZWdjMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xUPJPekC3BsKM853S8/giphy.gif
+![Cool Animation](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWxtZTV4cmpvYXBlcDRydjhzZGQ3dnRyenc3NXk0M2szenhkZWdjMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xUPJPekC3BsKM853S8/giphy.webp)
+
 
 ## Table of Contents
 
