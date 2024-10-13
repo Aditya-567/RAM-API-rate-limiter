@@ -131,4 +131,9 @@ Create a Lambda Role Role with these policies
 -  AWSLambda_FullAccess
 -  [Custom Policy](server/Lambda%20functions/Lambda_function_Policy): Ensure you have a custom policy for Redis access if needed.
 
+## License
+
+This project is licensed under the [MIT License](LICENSE). See the LICENSE file for more details.
+
+You can now copy this markdown and use it directly for your GitHub README. The steps, including cloning, installing dependencies, and deploying the backend, are now fully included!
 
