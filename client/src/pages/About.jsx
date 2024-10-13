@@ -100,7 +100,7 @@ const About = () => {
                     </div>
                     <div id='bg7' className=' rounded-lg px-6 py-6'>
                         <div className='flex justify-center items-center mb-4'>
-                            <img src={manav} className='rounded-lg' width="200" height="200" alt="manav khandurie" />
+                            <img src={manav} className='rounded-lg' style={{ width: '200px', height: '200px' }} alt="manav khandurie" />
                         </div>
                         <div className='flex flex-col justify-center items-center mb-4'>
                             <h1 className='text-2xl font-bold' >Manav Khandurie</h1>

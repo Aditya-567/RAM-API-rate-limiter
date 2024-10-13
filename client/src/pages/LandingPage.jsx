@@ -16,7 +16,7 @@ const LandingPage = () => {
     }, [state.user, navigate]);
 
     return (
-        <div className="my-4">
+        <div className="">
             {/* 3D Scene */}
             <div className="w-full h-screen">
                 <Spline scene="https://prod.spline.design/iX9N0wIBST9tjjRm/scene.splinecode" />
