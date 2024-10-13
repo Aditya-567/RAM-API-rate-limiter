@@ -81,7 +81,7 @@ The RAM API supports the following rate-limiting algorithms:
    ```
 3.  Set up your environment variables:
    
-   Create a [.env](#client/.env.example) file in the root directory and add the necessary AWS, Redis, and Firebase credentials:
+   Create a [.env](client/.env.example) file in the root directory and add the necessary AWS, Redis, and Firebase credentials:
    ```
    AWS_ACCESS_KEY_ID=your_aws_access_key
    AWS_SECRET_ACCESS_KEY=your_aws_secret_key
