@@ -99,12 +99,14 @@ The RAM API supports the following rate-limiting algorithms:
       * 4 for DIfferent algorithm
       * One for controller function
       * One for compare function
+   * DO create the role and policies [Lambda Role policies](#lambda-role-policies-required)
    * For the 4 algorithm lambda you need to upload the zip file first and then create (Given in the server page)
       ```
       lambda_function.py
       ```
       And paste those scripts
    * Create tthe 2 lambda functions (for these you do not require zip file)
+      * Do add the ARN of the 4 lambda functions to this    
    
 6. Start the frontend:
 
