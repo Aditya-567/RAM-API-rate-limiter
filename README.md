@@ -90,15 +90,16 @@ The RAM API uses a microservices-based architecture with the following component
 
 ## lambda role policies required
 
-AmazonAPIGatewayAdministrator
-
-AmazonEC2FullAccess
-
-AmazonElastiCacheFullAccess
-
-AWSLambda_FullAccess
+- Lambda Role Policies Required
+-  AmazonAPIGatewayAdministrator
+-  AmazonEC2FullAccess
+-  AmazonElastiCacheFullAccess
+-  AWSLambda_FullAccess
+-  Custom Policy: Ensure you have a custom policy for Redis access if needed.
 
 Custom Policy
 
 ## Redis URL
-rediss://redis-endpoint
+In this format the environment variable should be set up in lambda function
+
+URL - rediss://redis-endpoint
