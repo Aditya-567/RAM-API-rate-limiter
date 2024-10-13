@@ -79,7 +79,12 @@ The RAM API uses a microservices-based architecture with the following component
    FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
    FIREBASE_PROJECT_ID=your_firebase_project_id
    ```
-   
+4. Start the frontend:
+
+   After deploying the backend, you can start the frontend development server:
+   ```
+   npm run dev
+   ```
 
 
 
