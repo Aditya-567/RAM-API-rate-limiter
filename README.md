@@ -10,7 +10,7 @@ Welcome to the **RAM API** project! This platform allows users to manage, save, 
 - [Setup and Installation](#setup-and-installation)
 - [Usage](#usage)
 - [Rate Limiting Algorithms](#rate-limiting-algorithms)
-- [API Endpoints](#api-endpoints)
+- [Lambda Role policies](#lambda-role-policies-required)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -94,7 +94,19 @@ The RAM API supports the following rate-limiting algorithms:
    FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
    FIREBASE_PROJECT_ID=your_firebase_project_id
    ```
-4. Start the frontend:
+4. Backend Deployment
+   * We need to create 6 AWS Lambda Functions (All scripts are present in the server) [Go to the server directory](/server)
+      * 4 for DIfferent algorithm
+      * One for controller function
+      * One for compare function
+   * For the 4 algorithm lambda you need to upload the zip file first and then create (Given in the server page)
+      ```
+      lambda_function.py
+      ```
+      And paste those scripts
+   * Create tthe 2 lambda functions (for these you do not require zip file)
+   
+6. Start the frontend:
 
    After deploying the backend, you can start the frontend development server:
    ```
@@ -103,14 +115,14 @@ The RAM API supports the following rate-limiting algorithms:
 
 
 
-## lambda role policies required
+## Lambda role policies required
 
 - Lambda Role Policies Required
 -  AmazonAPIGatewayAdministrator
 -  AmazonEC2FullAccess
 -  AmazonElastiCacheFullAccess
 -  AWSLambda_FullAccess
--  Custom Policy: Ensure you have a custom policy for Redis access if needed.
+-  [Custom Policy](server/Lambda%20functions/Lambda_function_Policy): Ensure you have a custom policy for Redis access if needed.
 
 Custom Policy
 
