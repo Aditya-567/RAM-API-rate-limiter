@@ -57,9 +57,29 @@ The RAM API uses a microservices-based architecture with the following component
 ### Steps
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/Aditya-567/ram-api.git
+   ```
+   https://github.com/Hexton09/RAM-API-rate-limiter
    cd ram-api
+   ```
+2. Install dependencies:
+
+   Install the required Node.js dependencies for the project:
+   ```
+   npm install
+   ```
+3.  Set up your environment variables:
+
+   Create a .env file in the root directory and add the necessary AWS, Redis, and Firebase credentials:
+   ```
+   AWS_ACCESS_KEY_ID=your_aws_access_key
+   AWS_SECRET_ACCESS_KEY=your_aws_secret_key
+   REDIS_HOST=your_redis_host
+   REDIS_PORT=your_redis_port
+   FIREBASE_API_KEY=your_firebase_api_key
+   FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
+   FIREBASE_PROJECT_ID=your_firebase_project_id
+   ```
+   
 
 
 
