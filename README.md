@@ -23,11 +23,12 @@ Welcome to the **RAM API** project! This platform allows users to manage, save, 
 
 ## Technologies Used
 
-- **Backend**: AWS Lambda, Redis, API Gateway
-- **Frontend**: React, Vite, Tailwind CSS
-- **Authentication & Session Management**: Firebase
-- **Data Storage**: Redis (for API request data)
+- **Backend**: [AWS Lambda](https://aws.amazon.com/lambda/), [Redis](https://redis.io/), [API Gateway](https://aws.amazon.com/api-gateway/)
+- **Frontend**: [React](https://react.dev/), [Vite](https://vitejs.dev/), [Tailwind CSS](https://tailwindcss.com/)
+- **Authentication & Session Management**: [Firebase](https://firebase.google.com/)
+- **Data Storage**: [Redis](https://redis.io/) (for API request data)
 - **Algorithms**: Fixed Window, Sliding Window, Token Bucket, Leaky Bucket, Step Ladder
+
 
 ## Architecture
 
