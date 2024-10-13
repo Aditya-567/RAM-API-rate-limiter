@@ -118,7 +118,7 @@ The RAM API supports the following rate-limiting algorithms:
 
 
 ## Lambda role policies required
-
+Create a Lambda Role Role with these policies
 - Lambda Role Policies Required
 -  AmazonAPIGatewayAdministrator
 -  AmazonEC2FullAccess
