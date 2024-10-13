@@ -138,7 +138,7 @@ const SavePage = () => {
                         />
                         <button
                             onClick={handleSaveNote}
-                            className=" text-white font-bold rounded "
+                            className=" font-bold rounded text-lg p-2 relative overflow-hidden hover:text-blue-900 "
                             style={{
                                 height: '50px',
                                 width: '150px',
@@ -147,7 +147,7 @@ const SavePage = () => {
 
                             }}
                         >
-                            Save Policy
+                            <span className="relative z-10">Save Policy</span>
                         </button>
 
                     </div>
@@ -217,9 +217,9 @@ const SavePage = () => {
                             </div>
                             <button
                                 onClick={() => handleDeleteNote(note.id)}
-                                className="bg-red-600 hover:bg-red-700 text-white text-sm font-bold rounded px-3 py-1 ml-4"
+                                className="border-2 border-red-600 p-2 relative overflow-hidden hover:text-red-900  text-sm font-bold px-3 py-1 ml-4"
                             >
-                                Delete
+                                <span className="relative z-10">Delete</span>
                             </button>
                         </div>
                     </div>

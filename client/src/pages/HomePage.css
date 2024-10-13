@@ -1,0 +1,8 @@
+.large-cursor {
+  font-size: 32px; /* Adjust the size as needed */
+  color: yellow; /* Optional: Change the cursor color */
+}
+
+#bg {
+  box-shadow: 0px 0px 10px 0px rgba(53, 6, 94, 0.818);
+}

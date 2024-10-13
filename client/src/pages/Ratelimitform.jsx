@@ -97,7 +97,7 @@ const RateLimitForm = () => {
     };
 
     return (
-        <div style={{ width: '600px' }} className="mx-auto p-6 bg-gray-800 text-white rounded-lg shadow-lg">
+        <div id="bg" style={{ width: '650px' }} className="mx-auto p-6  text-white rounded-lg shadow-lg">
             <h2 className="text-center text-2xl font-bold mb-6">Rate Limiting Test</h2>
             <form onSubmit={handleSubmit}>
                 <div className="mb-4">
@@ -109,11 +109,11 @@ const RateLimitForm = () => {
                         style={{ fontFamily: 'monospace', fontSize: '16px' }}
                         placeholder='Enter the URL . . .'
                         required
-                        className="mt-1 p-2 w-full bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="mt-1 p-3 w-full bg-gray-300 text-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                 </div>
                 <div className="mb-4">
-                    <label htmlFor="numRequests" className="block text-sm font-medium text-gray-300" style={{ fontFamily: 'monospace' }}>Number of Requests:</label>
+                    <label htmlFor="numRequests" className="block text-sm font-medium text-gray-100" style={{ fontFamily: 'monospace' }}>Number of Requests:</label>
                     <input
                         type="number"
                         id="numRequests"
@@ -122,15 +122,16 @@ const RateLimitForm = () => {
                         onChange={(e) => setNumRequests(parseInt(e.target.value) || 1)}
                         required
                         style={{ fontFamily: 'monospace' }}
-                        className="mt-1 p-2 w-full bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="mt-1 p-3 w-full bg-gray-300 text-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                 </div>
-                <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    Submit
+                <button type="submit" className="w-full border-2 text-lg font-bold border-blue-500 text-white p-2 relative overflow-hidden hover:text-blue-900">
+                    <span className="relative z-10">S u b m i t</span>
                 </button>
+
             </form>
 
-            {loading && <p className="text-center mt-4">Loading...</p>}
+            {loading && <p className="text-center mt-4" style={{ fontFamily: 'monospace', fontSize: '16px' }}>Loading...</p>}
             {error && <p className="text-center mt-4 text-red-500">{error}</p>}
             {bestAlgorithm && (
                 <div className="text-center mt-6">

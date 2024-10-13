@@ -195,19 +195,19 @@ const RateLimiterTester = () => {
 
             <div className="text-white flex mb-32 mx-20 gap-20">
                 <div className="flex-1">
-                    <h1 className='text-3xl font-bold pb-2'>JSON Editor . . .</h1>
-                    <div className="flex gap-4 mb-4">
-                        <button className="p-2 bg-blue-500 text-white rounded" onClick={fillJsonPolicy1}>
-                            Token Bucket
+                    <h1 className='text-3xl font-bold pb-4'>JSON Editor . . .</h1>
+                    <div className="flex justify-between mb-2 font-bold" style={{ fontSize: '16px' }}>
+                        <button className="px-6 py-1 border-2 border-blue-400  relative overflow-hidden hover:text-blue-900 " onClick={fillJsonPolicy1}>
+                            <span className="relative z-10">Token Bucket</span>
                         </button>
-                        <button className="p-2 bg-blue-500 text-white rounded" onClick={fillJsonPolicy2}>
-                            Fixed Window
+                        <button className="px-6 py-1 border-2 border-blue-400 relative overflow-hidden hover:text-blue-900" onClick={fillJsonPolicy2}>
+                            <span className="relative z-10">Fixed Window</span>
                         </button>
-                        <button className="p-2 bg-blue-500 text-white rounded" onClick={fillJsonPolicy3}>
-                            Sliding Window
+                        <button className="px-6 py-1 border-2 border-blue-400  relative overflow-hidden hover:text-blue-900 " onClick={fillJsonPolicy3}>
+                            <span className="relative z-10">Sliding Window</span>
                         </button>
-                        <button className="p-2 bg-blue-500 text-white rounded" onClick={fillJsonPolicy4}>
-                            Step Ladder
+                        <button className="px-8 py-1 border-2 border-blue-400  relative overflow-hidden hover:text-blue-900 " onClick={fillJsonPolicy4}>
+                            <span className="relative z-10">Step Ladder</span>
                         </button>
                     </div>
                     <label className="block mb-2">
@@ -221,6 +221,7 @@ const RateLimiterTester = () => {
                                 boxShadow: '1px 1px 5px white',
                                 background: 'linear-gradient(to bottom, #ffffff, #d3d3d3)'
                             }}
+
                             rows="4"
                             placeholder="Enter JSON Policy here..."
                             value={jsonPolicy}
@@ -243,14 +244,16 @@ const RateLimiterTester = () => {
                                 value={numRequests}
                                 onChange={(e) => setNumRequests(parseInt(e.target.value) || 1)} />
                         </label>
-                        <button className="p-2 cursor-pointer"
+                        <button className="p-2 cursor-pointer text-lg font-bold p-2 relative overflow-hidden hover:text-blue-900 "
                             style={{
                                 height: '60px',
                                 width: '372px',
                                 borderRadius: '10px',
                                 boxShadow: '1px 1px 5px blue',
                             }}
-                            onClick={sendRequests}>Send Requests</button>
+                            onClick={sendRequests}>
+                            <span className="relative z-10">Send Requests</span>
+                        </button>
                     </div>
                 </div>
                 <div id='pie' className="flex-1 mb-32" style={{ height: '500px', width: '500px' }}>

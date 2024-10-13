@@ -31,7 +31,7 @@ const NavBar = () => {
     };
 
     return (
-        <nav className=" bg-opacity-50 text-white px-4 pt-4 font-bold flex justify-between fixed top-0 left-0 w-full z-50" style={{ background: 'radial-gradient(circle at top, #2d0136, #0f0216 80%, #05010b 95%)' }}>
+        <nav className=" bg-opacity-50 text-white px-4 pt-4 pb-4 font-bold flex justify-between fixed top-0 left-0 w-full z-50" style={{ background: 'radial-gradient(circle at top, #2d0136, #0f0216 80%, #05010b 95%)' }}>
             <div className="flex items-center pl-4 gap-6 ">
 
                 <img src={logo} alt="logo" className="h-14" /><h1 className='text-2xl'>RAM API RATE LIMITER</h1>

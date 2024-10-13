@@ -2,9 +2,9 @@ import React from 'react';
 
 const SummaryPage = () => {
     return (
-        <div className="p-8 bg-transparent text-white" style={{ fontFamily: 'monospace', }}>
-            <h2 className="text-center text-2xl font-bold mb-6">Lambda Function Payload Summary</h2>
-            <p className="mb-4">Below is the summary of how each Lambda function uses the payload parameters:</p>
+        <div className="p-8 bg-transparent text-white" >
+            <h2 className="text-center text-4xl font-bold mb-6">Lambda Function Payload Summary</h2>
+            <p className="mb-4 text-center" style={{ fontFamily: 'monospace', fontSize: '16px' }}>Below is the summary of how each Lambda function uses the payload parameters:</p>
             <div className="overflow-x-auto">
                 <table className="w-full table-auto border-collapse border border-gray-700">
                     <thead>
@@ -14,7 +14,7 @@ const SummaryPage = () => {
                             <th className="border border-gray-700 px-4 py-2">Used By</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody style={{ fontFamily: 'monospace', fontSize: '16px' }}>
                         <tr className="bg-gray-800 hover:bg-gray-700">
                             <td className="border border-gray-700 px-4 py-2">resource</td>
                             <td className="border border-gray-700 px-4 py-2">Identifier for the resource being rate-limited</td>
