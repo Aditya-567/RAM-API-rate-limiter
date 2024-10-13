@@ -2,6 +2,12 @@
 
 Welcome to the **RAM API** project! This platform allows users to manage, save, and edit JSON policies while offering built-in rate-limiting functionalities, user authentication, and algorithm comparison features. RAM API is designed to be a flexible and scalable solution for controlling access and efficiently managing JSON-based policies.
 
+Try it
+
+[![SpongeBob GIF](https://giphy.com/embed/xUPJPekC3BsKM853S8)](https://giphy.com/gifs/spongebob-spongebob-squarepants-season-6-xUPJPekC3BsKM853S8)
+
+[Check it out via GIPHY](https://giphy.com/gifs/spongebob-spongebob-squarepants-season-6-xUPJPekC3BsKM853S8)
+
 ## Table of Contents
 
 - [Features](#features)
