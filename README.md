@@ -82,18 +82,18 @@ The RAM API supports the following rate-limiting algorithms:
    ```
 3.  Set up your environment variables:
    
-   Create a [.env](client/.env.example) file in the root directory and add the necessary AWS, Redis, and Firebase credentials:
-   ```
-   AWS_ACCESS_KEY_ID=your_aws_access_key
-   AWS_SECRET_ACCESS_KEY=your_aws_secret_key
-   REDIS_HOST=your_redis_host
-   REDIS_PORT=your_redis_port
-   FIREBASE_API_KEY=your_firebase_api_key
-   FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
-   FIREBASE_PROJECT_ID=your_firebase_project_id
-   VITE_API_URL1=API gateway controller
-   VITE_API_URL_RATE_LIMITER= API gateway for compare
-   ```
+      Create a [.env](client/.env.example) file in the root directory and add the necessary AWS, Redis, and Firebase credentials:
+      ```
+      AWS_ACCESS_KEY_ID=your_aws_access_key
+      AWS_SECRET_ACCESS_KEY=your_aws_secret_key
+      REDIS_HOST=your_redis_host
+      REDIS_PORT=your_redis_port
+      FIREBASE_API_KEY=your_firebase_api_key
+      FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
+      FIREBASE_PROJECT_ID=your_firebase_project_id
+      VITE_API_URL1=API gateway controller
+      VITE_API_URL_RATE_LIMITER= API gateway for compare
+      ```
 4. Backend Deployment
    * We need to create 6 AWS Lambda Functions (All scripts are present in the server) [Go to the server directory](/server)
       * 4 for DIfferent algorithm
