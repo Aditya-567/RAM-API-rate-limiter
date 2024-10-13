@@ -113,7 +113,7 @@ The RAM API supports the following rate-limiting algorithms:
    * Create tthe 2 lambda functions (for these you do not require zip file)
       * Do add the ARN of the 4 lambda functions to this    
    * Now Create 2 API gateway REST API (one for controller and one for compare and use those endpoint for the compare)
-   * Increase the time of lambda functions accordingly
+   * Increase the time of lambda function execution accordingly
 6. Start the frontend:
 
    After deploying the backend, you can start the frontend development server:
