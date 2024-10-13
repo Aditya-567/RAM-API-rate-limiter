@@ -8,12 +8,9 @@ Welcome to the **RAM API** project! This platform allows users to manage, save, 
 - [Technologies Used](#technologies-used)
 - [Architecture](#architecture)
 - [Setup and Installation](#setup-and-installation)
-- [Usage](#usage)
 - [Rate Limiting Algorithms](#rate-limiting-algorithms)
-- [Lambda Role policies](#lambda-role-policies-required)
-- [Contributing](#contributing)
 - [License](#license)
-
+- 
 ## Features
 
 - **JSON Lab**: Create, save, and edit JSON policies in real-time.
@@ -84,7 +81,7 @@ The RAM API supports the following rate-limiting algorithms:
    ```
 3.  Set up your environment variables:
    
-   Create a .env file in the root directory and add the necessary AWS, Redis, and Firebase credentials:
+   Create a [.env](#client/.env.example) file in the root directory and add the necessary AWS, Redis, and Firebase credentials:
    ```
    AWS_ACCESS_KEY_ID=your_aws_access_key
    AWS_SECRET_ACCESS_KEY=your_aws_secret_key
@@ -93,12 +90,15 @@ The RAM API supports the following rate-limiting algorithms:
    FIREBASE_API_KEY=your_firebase_api_key
    FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
    FIREBASE_PROJECT_ID=your_firebase_project_id
+   VITE_API_URL1=API gateway controller
+   VITE_API_URL_RATE_LIMITER= API gateway for compare
    ```
 4. Backend Deployment
    * We need to create 6 AWS Lambda Functions (All scripts are present in the server) [Go to the server directory](/server)
       * 4 for DIfferent algorithm
       * One for controller function
       * One for compare function
+      * All of the Lambda functions need to be within a VPC
    * DO create the role and policies [Lambda Role policies](#lambda-role-policies-required)
    * For the 4 algorithm lambda you need to upload the zip file first and then create (Given in the server page)
       ```
@@ -107,14 +107,13 @@ The RAM API supports the following rate-limiting algorithms:
       And paste those scripts
    * Create tthe 2 lambda functions (for these you do not require zip file)
       * Do add the ARN of the 4 lambda functions to this    
-   
+   * Now Create 2 API gateway REST API (one for controller and one for compare and use those endpoint for the compare)
 6. Start the frontend:
 
    After deploying the backend, you can start the frontend development server:
    ```
    npm run dev
    ```
-
 
 
 ## Lambda role policies required
