@@ -44,6 +44,21 @@ The RAM API uses a microservices-based architecture with the following component
 
 ![image](https://github.com/user-attachments/assets/f27738dc-cb9b-4329-a4ad-5e02887fb121)
 
+## Rate Limiting Algorithms
+
+The RAM API supports the following rate-limiting algorithms:
+
+- **Fixed Window**: Simple fixed window-based rate limiting.
+
+- **Sliding Window**: A more accurate sliding window algorithm.
+
+- **Token Bucket**: Allows burst traffic while maintaining control over the rate.
+
+- **Leaky Bucket**: Controls the rate of requests in a smooth, predictable way.
+
+- **Step Ladder (Custom Algorithm)**: A custom-made algorithm designed to gradually scale the rate limits based on traffic behavior. This algorithm allows for dynamic adjustments in the rate limit, stepping up or down based on usage patterns. It is useful for scenarios where traffic varies significantly over time, and a static rate limit is inefficient.
+
+
 ## Setup and Installation
 
 ### Prerequisites
@@ -103,3 +118,5 @@ Custom Policy
 In this format the environment variable should be set up in lambda function
 
 URL - rediss://redis-endpoint
+
+
