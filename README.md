@@ -68,7 +68,7 @@ The RAM API uses a microservices-based architecture with the following component
    npm install
    ```
 3.  Set up your environment variables:
-
+   
    Create a .env file in the root directory and add the necessary AWS, Redis, and Firebase credentials:
    ```
    AWS_ACCESS_KEY_ID=your_aws_access_key
