@@ -1,0 +1,111 @@
+import redis
+import time
+import os
+
+# Setup Redis client
+URL = os.environ.get('URL')
+redis_client = redis.Redis.from_url(URL)
+
+# Step Ladder parameters
+BASE_RATE_LIMIT = 10  # Base limit (e.g., 10 requests per minute)
+STEP_SIZE = 5         # Number of requests added/subtracted per step
+MAX_STEP_LEVEL = 5    # Maximum step level
+COOLDOWN_PERIOD = 60  # Cooldown period after violation (in seconds)
+TIME_WINDOW = 60      # Time window in seconds (1 minute)
+
+def is_allowed(resource, current_step_level, refill_rate, ttl_seconds):
+    start_time = time.time()  # Start measuring time
+
+    # Redis keys
+    token_key = f"step_ladder_tokens:{resource}"
+    last_update_key = f"last_update_time:{resource}"
+
+    # Get the current token count and last update time
+    current_tokens = redis_client.get(token_key)
+    current_tokens = int(current_tokens) if current_tokens else BASE_RATE_LIMIT
+    
+    last_update_time = redis_client.get(last_update_key)
+    last_update_time = float(last_update_time) if last_update_time else time.time()
+    time_since_last_update = time.time() - last_update_time
+    
+    # Calculate how many tokens to add based on time passed
+    tokens_to_add = int(time_since_last_update * (refill_rate / ttl_seconds))
+    current_tokens = min(current_tokens + tokens_to_add, current_step_level)
+    
+    # Update tokens and last update time in Redis
+    redis_client.setex(token_key, ttl_seconds, current_tokens)
+    redis_client.setex(last_update_key, ttl_seconds, time.time())
+
+    # Determine if the request is allowed
+    allowed = current_tokens >= 1
+    if allowed:
+        redis_client.decr(token_key)
+
+    end_time = time.time()  # End measuring time
+    time_taken = end_time - start_time  # Calculate time taken
+
+    return allowed, time_taken
+
+def update_step_ladder(resource, allowed, current_step_level):
+    step_level_key = f"step_ladder_step_level:{resource}"
+    violations_key = f"step_ladder_violations:{resource}"
+
+    # Get current step level and violations from Redis
+    violations = int(redis_client.get(violations_key) or 0)
+
+    if allowed:
+        # Reward: increment step level if request was allowed and user is behaving well
+        if current_step_level < MAX_STEP_LEVEL:
+            current_step_level += STEP_SIZE
+    else:
+        # Penalize: decrement step level if request was throttled
+        if current_step_level > 0:
+            current_step_level = max(0, current_step_level - STEP_SIZE)
+            violations += 1  # Increment violation count
+        
+        # Start cooldown period if too many violations
+        if violations >= MAX_STEP_LEVEL:
+            redis_client.setex(f"cooldown:{resource}", COOLDOWN_PERIOD, time.time())
+    
+    # Save updated step level and violations
+    redis_client.set(step_level_key, current_step_level)
+    redis_client.set(violations_key, violations)
+
+    return current_step_level
+
+def lambda_handler(event, context):
+    resource = event['resource']
+    current_step_level = int(redis_client.get(f"step_ladder_step_level:{resource}") or BASE_RATE_LIMIT)
+    refill_rate = event['refillrate']
+    ttl_seconds = event['ttl']
+    url = event['url']
+
+    # Check if the user is in cooldown period
+    cooldown = redis_client.get(f"cooldown:{resource}")
+    if cooldown:
+        return {
+            'statusCode': 429,
+            'body': f"Cooldown period in effect for {url}",
+            'timeTaken': 0
+        }
+
+    # Check if the request is allowed
+    allowed, time_taken = is_allowed(resource, current_step_level, refill_rate, ttl_seconds)
+
+    # Update the step ladder based on user behavior
+    current_step_level = update_step_ladder(resource, allowed, current_step_level)
+
+    if allowed:
+        return {
+            'statusCode': 200,
+            'body': f"Allowed request to {url}",
+            'timeTaken': time_taken,  # Include time taken in the response
+            'currentStepLevel': current_step_level  # Return current step level for debugging
+        }
+    else:
+        return {
+            'statusCode': 429,
+            'body': f"Rate limit exceeded for {url}",
+            'timeTaken': time_taken,  # Include time taken in the response
+            'currentStepLevel': current_step_level  # Return current step level for debugging
+        }
